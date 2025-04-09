@@ -1,17 +1,12 @@
 import { Router } from 'express';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import * as loginController from '../controllers/loginController.js';
+
 const router = Router();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
 //ruta principal apenas se inicializa el server
-router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../views/login.html'));
-});
+router.get('/', loginController.mainFile);
 
-
+//consigue la el Ip del usuario
+router.get('/getIp', loginController.getIp);
 
 export default router;

@@ -5,7 +5,8 @@ const rutas_init = () => {
   const router = Router()
 
   router.use('/', loginRoutes);
-  
+  router.use('/login', loginRoutes);
+
   return router
 }
 
