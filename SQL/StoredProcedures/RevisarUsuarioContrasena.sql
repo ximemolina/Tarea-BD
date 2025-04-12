@@ -21,9 +21,74 @@ BEGIN
 		IF NOT EXISTS ( SELECT 1 FROM dbo.Usuario A WHERE A.Username = @inUsername )
 		BEGIN
 
-			SET @outResultCode = 50001; ---Usuario no existe
+			SET @IdPostByUser = 0;---Asigna id por default de user "no conocido"
 
-			RETURN  @outResultCode;
+			---Cantidad de Logins No Exitosos que han habido en la ultima media hora
+			SET @CantLogin = ( SELECT COUNT(*)
+								FROM 
+									dbo.BitacoraEvento AS E
+								WHERE
+									DATEDIFF(MINUTE, E.PostTime, GETDATE()) < 30 ---Revisar ultima media hora
+									AND E.IdTipoEvento = 2) ---Revisar que sea error de login
+			
+			---Revisar que no hayan mas de 5 Logins No Exitosos en la ultima media hora
+			IF @CantLogin > 4
+			BEGIN
+				
+				--Caso de que haya mas de 5 Logins No Exitosos (deshabilitar login)
+
+				SET @IdTipoEvento = 3 ; ---Id tipo de evento de Login Deshabilitado
+
+				SET @outResultCode = 50003; ---Login Deshabilitado
+
+				INSERT dbo.BitacoraEvento( 	---Inserción de evento Login Deshabilitado a BitacoraEventos
+					IdTipoEvento
+					,IdPostByUser
+					,Descripcion
+					,PostInIp
+					,PostTime
+				) VALUES (
+					@IdTipoEvento
+					,@IdPostByUser
+					,@Descripcion
+					,@inIpAdress
+					,GETDATE()
+				);
+
+				RETURN  @outResultCode;
+			END;
+
+			---Caso de que hayan menos de 5 logins no exitosos
+			ELSE 
+			BEGIN
+
+				SET @IdTipoEvento = 2; ---Id tipo de evento de Login No Exitoso
+
+				SET @outResultCode = 50001; ---Usuario no existe
+
+				SET @Descripcion = ( 
+									'Numero de intento en los ultimos 30mins: ' 
+									+ CONVERT( VARCHAR , @CantLogin+1 ) 
+									+ '. Codigo de error: ' 
+									+ CONVERT( VARCHAR(64) , @outResultCode)); ---Busca y asigna description de error
+			
+				INSERT dbo.BitacoraEvento( 	---Inserción de evento Login No Exitoso a BitacoraEventos
+					IdTipoEvento
+					,IdPostByUser
+					,Descripcion
+					,PostInIp
+					,PostTime
+				) VALUES (
+					@IdTipoEvento
+					,@IdPostByUser
+					,@Descripcion
+					,@inIpAdress
+					,GETDATE()
+				);
+
+				RETURN  @outResultCode;
+			END;
+
 		END;
 
 
