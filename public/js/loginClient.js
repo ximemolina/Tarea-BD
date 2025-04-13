@@ -18,7 +18,6 @@ async function fetchIp(){
 async function login(){
     try {
         const ipAdress = await fetchIp();
-
         fetch('/login/revLogin', {
             method: 'POST',
             headers: {
@@ -29,6 +28,9 @@ async function login(){
         .then(response => response.json())
         .then(data => {
             alert(data.resultado);
+        })
+        .catch(error => {
+            console.error("Error parsing response:", error);
         })
     } catch (error) {
         alert("Login error: " + error.message);

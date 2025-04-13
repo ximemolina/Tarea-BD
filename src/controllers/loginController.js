@@ -29,5 +29,5 @@ export const getIp = async (req, res) => {
 export const revisarLogin = async (req,res) => {
     const { username, password, ipAdress } = req.body;
     const resultado = await functionsDB.revisarLogin(username,password,ipAdress);
-    res.status(200).json({ resultado });
+    res.json({resultado});
 };
