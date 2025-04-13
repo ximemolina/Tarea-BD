@@ -193,10 +193,6 @@ BEGIN
 	END TRY
 	BEGIN CATCH
 
-		IF @@TRANCOUNT>0 --Error ocasionado dentro de la transacción
-		BEGIN
-			ROLLBACK TRANSACTION
-		END;
 		INSERT INTO dbo.DBError VALUES
 		(
 			SUSER_NAME(),
