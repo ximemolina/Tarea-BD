@@ -1,13 +1,4 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-export const mainFile = async (req, res) => {
-    res.sendFile(path.join(__dirname, '../views/login.html'));
-};
+import * as functionsDB from '../model/loginDB.js'
 
 export const getIp = async (req, res) => {
     let ip =
@@ -23,4 +14,16 @@ export const getIp = async (req, res) => {
     }
 
     res.send(ip);
+};
+
+export const revisarLogin = async (req,res) => {
+    const { username, password, ipAdress } = req.body;
+    const resultado = await functionsDB.revisarLogin(username,password,ipAdress);
+    res.json({resultado});
+};
+
+export const revisarBloqueo = async (req,res) => {
+    const {ipAdress} = req.body;
+    const resultado = await functionsDB.revisarBloqueo(ipAdress);
+    res.json({resultado});
 };
