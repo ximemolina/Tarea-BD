@@ -19,6 +19,11 @@ export const getIp = async (req, res) => {
 export const revisarLogin = async (req,res) => {
     const { username, password, ipAdress } = req.body;
     const resultado = await functionsDB.revisarLogin(username,password,ipAdress);
-    console.log(resultado);
+    res.json({resultado});
+};
+
+export const revisarBloqueo = async (req,res) => {
+    const {ipAdress} = req.body;
+    const resultado = await functionsDB.revisarBloqueo(ipAdress);
     res.json({resultado});
 };

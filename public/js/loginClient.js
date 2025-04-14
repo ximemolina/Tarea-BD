@@ -1,6 +1,11 @@
 const btnLogin = document.getElementById("btnLogin");
 
-btnLogin.addEventListener("click", login)
+btnLogin.addEventListener("click", login);
+
+window.addEventListener('DOMContentLoaded', () => {
+    revisarBloqueo();
+  });
+
 
 //Consigue el IpAdress del usuario
 async function fetchIp(){
@@ -11,6 +16,25 @@ async function fetchIp(){
     } catch (error) {
         alert('Error fetching IP: ' + error);
     }
+}
+
+//Revisa el ipAdress y la cantidad de logins fallidos
+async function revisarBloqueo(){
+
+    const ipAdress = await fetchIp();
+    const response = await fetch('/login/revBloqueo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ipAdress })
+      });
+  
+      const data = await response.json();
+      resultado = data.resultado[0][""];
+      if(resultado >= 5) {
+        btnLogin.disabled = true;
+      }
 }
 
 //Muestra descripcion de error

@@ -9,4 +9,7 @@ router.get('/getIp', loginController.getIp);
 //valida datos del login
 router.post('/revLogin',loginController.revisarLogin);
 
+//revisa si el boton de login esta bloqueado
+router.post('/revBloqueo', loginController.revisarBloqueo);
+
 export default router;

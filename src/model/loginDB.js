@@ -18,3 +18,19 @@ export async function revisarLogin(username,password,ipAdress) {
         console.error('Error ejecutando el SP:', err)
     }
 }
+
+export async function revisarBloqueo(ipAdress) {
+    try {
+        let pool = await conectarDB();
+
+        let resultado = await pool.request()
+            .input('inIpAdress', sql.VarChar(64), ipAdress)
+            .output('outResultCode', sql.Int)
+            .execute('RevisarBloqueo');
+
+            return resultado.recordset;
+        
+    } catch (err) {
+        console.error('Error ejecutando el SP:', err)
+    }
+}
