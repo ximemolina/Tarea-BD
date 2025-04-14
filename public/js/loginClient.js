@@ -15,6 +15,49 @@ async function fetchIp(){
     }
 }
 
+//Muestra descripcion de error
+async function mostrarError(codigo){
+    const response = await fetch('/general/getError', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ codigo })
+      });
+  
+      const data = await response.json();
+      resultado = data.resultado[0].Descripcion;
+      alert(resultado);
+}
+
+//Pasa a pagina principal
+async function loginCorrecto(){
+
+}
+
+//Revisa codigo que retorna el SP y decide que accion realizar
+function revCodigo(codigo) {
+    switch (codigo) {
+
+        case 0: //Datos ingresados correctamente
+            loginCorrecto();
+            break;
+
+        case 50001: //Username no existe
+            mostrarError(50001);
+            break;
+
+        case 50002: //Contraseña no coincide con el username
+            mostrarError(50002);
+            break;
+
+        case 50003: //Max cantidad de intentos de login fallidos sobrepasada
+            btnLogin.disabled = true;
+            mostrarError(50003);
+            break;
+    }
+}
+
 //Revisa los datos que ingresó el usuario a las casillas y verifica si el usuario ya está en la base de datos
 async function login(){
     try {
@@ -36,23 +79,5 @@ async function login(){
     } catch (error) {
         alert("Login error: " + error.message);
     }
-
-}
-
-//Revisa codigo que retorna el SP y decide que accion realizar
-function revCodigo(codigo) {
-    if (codigo == 0) {
-        //no hay error !! pasa a siguiente html
-    }
-    if (codigo == 50003) {
-        bloqueoLogin();
-    }
-}
-
-
-//Deshabilita el boton de Login en caso de que el user haya hecho +5 login fallidos
-function bloqueoLogin() {
-    //alert con mensaje de error
-    btnLogin.disabled = true;
 
 }
