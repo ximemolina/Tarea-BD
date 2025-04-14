@@ -9,13 +9,13 @@ BEGIN
 
 		SET @outResultCode=0; ---Código error 0 indica que no hubo error
 
-		---Cantidad de Logins No Exitosos que han habido en la ultima media hora
+		---Revisar si hay un login deshabilitado en los ultimos diez minutos
 		SELECT COUNT(*)
 		FROM 
 			dbo.BitacoraEvento AS E
 		WHERE
-			DATEDIFF(MINUTE, E.PostTime, GETDATE()) < 30 ---Revisar ultima media hora
-			AND E.IdTipoEvento = 2 ---Revisar que sea error de login
+			DATEDIFF(MINUTE, E.PostTime, GETDATE()) < 10---Revisar ultimos diez mins
+			AND E.IdTipoEvento = 3 ---Revisar que sea error de login
 
 		RETURN  @outResultCode;
 

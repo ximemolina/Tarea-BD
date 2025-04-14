@@ -32,7 +32,7 @@ async function revisarBloqueo(){
   
       const data = await response.json();
       resultado = data.resultado[0][""];
-      if(resultado >= 5) {
+      if(resultado >= 1) {
         btnLogin.disabled = true;
       }
 }
