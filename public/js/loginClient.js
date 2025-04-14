@@ -1,6 +1,4 @@
 const btnLogin = document.getElementById("btnLogin");
-const username = document.getElementById("username").value;
-const password = document.getElementById("password").value;
 
 btnLogin.addEventListener("click", login)
 
@@ -55,12 +53,22 @@ function revCodigo(codigo) {
             btnLogin.disabled = true;
             mostrarError(50003);
             break;
+
+        case 50008: //Error en la base de datos
+            mostrarError(50008);
+            break;
+
     }
 }
 
 //Revisa los datos que ingresó el usuario a las casillas y verifica si el usuario ya está en la base de datos
 async function login(){
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
     try {
+        
         const ipAdress = await fetchIp();
         fetch('/login/revLogin', {
             method: 'POST',
