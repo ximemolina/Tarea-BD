@@ -5,6 +5,7 @@ dotenv.config(); //uso de variables de entorno
 
 const config ={
     server: process.env.server,
+    port: parseInt(process.env.port), 
     database: process.env.database,
     user: process.env.user,
     password: process.env.password,
