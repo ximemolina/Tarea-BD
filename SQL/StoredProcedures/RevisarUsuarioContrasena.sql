@@ -28,8 +28,8 @@ BEGIN
 								FROM 
 									dbo.BitacoraEvento AS E
 								WHERE
-									DATEDIFF(MINUTE, E.PostTime, GETDATE()) < 30 ---Revisar ultima media hora
-									AND E.IdTipoEvento = 2) ---Revisar que sea error de login
+									DATEDIFF( MINUTE, E.PostTime, GETDATE() ) < 30 ---Revisar ultima media hora
+									AND E.IdTipoEvento = 2 ) ---Revisar que sea error de login
 			
 			---Revisar que no hayan mas de 5 Logins No Exitosos en la ultima media hora
 			IF @CantLogin > 4
@@ -110,7 +110,7 @@ BEGIN
 								FROM 
 									dbo.BitacoraEvento AS E
 								WHERE
-									DATEDIFF(MINUTE, E.PostTime, GETDATE()) < 30 ---Revisar ultima media hora
+									DATEDIFF( MINUTE, E.PostTime, GETDATE() ) < 30 ---Revisar ultima media hora
 									AND E.IdTipoEvento = 2) ---Revisar que sea error de login
 			
 			---Revisar que no hayan mas de 5 Logins No Exitosos en la ultima media hora
@@ -152,7 +152,7 @@ BEGIN
 									'Numero de intento en los ultimos 30mins: ' 
 									+ CONVERT( VARCHAR , @CantLogin+1 ) 
 									+ '. Codigo de error: ' 
-									+ CONVERT( VARCHAR(64) , @outResultCode)); ---Busca y asigna description de error
+									+ CONVERT( VARCHAR(64) , @outResultCode )); ---Busca y asigna description de error
 			
 				INSERT dbo.BitacoraEvento( 	---Inserción de evento Login No Exitoso a BitacoraEventos
 					IdTipoEvento
