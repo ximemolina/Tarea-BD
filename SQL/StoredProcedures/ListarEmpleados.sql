@@ -14,9 +14,10 @@ BEGIN
 			E.ValorDocumentoIdentidad AS Identificacion
 			, E.Nombre AS Nombre
 			, E.FechaContratacion AS Ingreso
-			, E.EsActivo AS Activo
 		FROM 
 			dbo.Empleado AS E
+		WHERE 
+			E.EsActivo = 1		--Filtrar empleados activos
 		ORDER BY
 			Nombre;
 		SET @outResultCode = 0;
