@@ -15,7 +15,7 @@ BEGIN
 			dbo.BitacoraEvento AS E
 		WHERE
 			DATEDIFF(MINUTE, E.PostTime, GETDATE()) < 10---Revisar ultimos diez mins
-			AND E.IdTipoEvento = 3 ---Revisar que sea error de login
+			AND E.IdTipoEvento = 3 ---Revisar que sea error de login deshabilitado
 
 		RETURN  @outResultCode;
 
