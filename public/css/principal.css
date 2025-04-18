@@ -50,3 +50,9 @@ button.bg-red-600:hover {
 .flex-space {
   @apply flex justify-between;
 }
+
+.contenedor-tabla {
+    overflow-y: auto;
+    width: 80%; /* O cualquier otro valor */
+    height: 10 cm;
+}
