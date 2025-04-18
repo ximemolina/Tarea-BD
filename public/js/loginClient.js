@@ -54,11 +54,19 @@ async function mostrarError(codigo){
 
 //Pasa a pagina principal
 async function loginCorrecto(){
-
+    console.log('Login exitoso');
+    try {
+        //const storedData = JSON.parse(localStorage.getItem('user'));
+        //console.log(storedData);
+        window.location.href = 'http://localhost:3300/principal/ventanaPrincipal'; // Redirige a la nueva página
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
 
 //Revisa codigo que retorna el SP y decide que accion realizar
 function revCodigo(codigo) {
+    console.log("Codigo login", codigo);
     switch (codigo) {
 
         case 0: //Datos ingresados correctamente
@@ -94,6 +102,9 @@ async function login(){
     try {
         
         const ipAdress = await fetchIp();
+        const data = {username: username, IP: ipAdress};
+        //console.log("Datos del usuario:", username, password, ipAdress);
+        localStorage.setItem('user', JSON.stringify(data));
         fetch('/login/revLogin', {
             method: 'POST',
             headers: {

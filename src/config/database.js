@@ -1,7 +1,13 @@
 import sql from 'mssql';
-import dotenv from "dotenv";
+import * as dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-dotenv.config(); //uso de variables de entorno
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Cargar .env desde la raíz del proyecto
+dotenv.config({ path: path.resolve(__dirname, '../../.env') }); //uso de variables de entorno
 
 const config ={
     server: process.env.server,
