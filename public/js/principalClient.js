@@ -48,7 +48,11 @@ async function eliminar(){
     const username = parsedUser.username
     const ipAdress = parsedUser.IP
 
-    const nombreEmpleado = 'Jeffrey Watson';  //falta de alguna manera seleccionar empleado este solo para prueba****************
+    const nombreEmpleado = 'Susana Feng'; //falta de alguna manera seleccionar empleado este solo para prueba*
+    
+    /*const empleado = localStorage.getItem('empleado');
+    const parsedEmpleado = JSON.parse(empleado);
+    const nombreEmpleado = parsedEmpleado.nombre;*/
 
     let docId = await getDocumentoIdentidad(nombreEmpleado); 
 
@@ -91,7 +95,7 @@ async function listarEmpleados() {
     }   
 }
 
-//Restringe la a que solo 1 checkbox este seleccionado
+//Restringe a que solo 1 checkbox este seleccionado
 function assignEvtCheckbox() {
     document.querySelectorAll(".fila-checkbox").forEach(checkbox => {
         checkbox.addEventListener("change", function() {
@@ -101,7 +105,7 @@ function assignEvtCheckbox() {
                 }
             });
             let empleadoSeleccionado = obtenerFilaSeleccionada();
-            localStorage.setItem('empleado', JSON.stringify(empleadoSeleccionado[1]));
+            localStorage.setItem('empleado', JSON.stringify({nombre: empleadoSeleccionado[1]}));
             //console.log("Local storage", localStorage.getItem('empleado'));
             return empleadoSeleccionado;
         });
