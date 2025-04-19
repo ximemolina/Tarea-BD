@@ -50,5 +50,3 @@ export function generarTabla(tabla) {
 
     return tableHTML;
 }
-
-// Devuelve el nombre del empleado que ha sido seleccionado de la tabla

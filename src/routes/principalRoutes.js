@@ -8,4 +8,6 @@ router.get('/ventanaPrincipal', principalController.principalFile);
 
 router.get('/listarEmpleados', principalController.listarEmpleados);
 
+router.get('/obtenerFilaSeleccionada', principalController.obtenerFilaSeleccionada);
+
 export default router;

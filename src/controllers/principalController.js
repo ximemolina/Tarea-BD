@@ -22,3 +22,13 @@ export const listarEmpleados = async (req,res) => {
         console.log("Error: " + table[0], "No se pudo cargar la tabla")
     }
 };
+
+export const obtenerFilaSeleccionada = async (req,res) => {
+    try {
+        let empleadoSeleccionado = principalFunc.obtenerFilaSeleccionada();
+        return empleadoSeleccionado;
+    }
+    catch (err) {
+        console.log("No se pudo obtener los datos de la fila seleccionada")
+    }
+}
