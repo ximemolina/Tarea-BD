@@ -20,15 +20,47 @@ function insertar(){
 
 }
 
-//Elimina el empleado seleccionado
-function eliminar(){
-    //falta de alguna manera seleccionar empleado
+//Conseguir el documento de identidad del empleado para poder desplegarlo en alerta de eliminar
+async function getDocumentoIdentidad(nombre){
+    try {
+        const response = await fetch('/principal/getDocId', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ nombre})
+          });
+      
+          const data = await response.json();
+          resultado = data.resultado[0].ValorDocumentoIdentidad;
+          return resultado;
+    } catch (error) {
+        alert('Error fetching IP: ' + error);
+    }    
 
-    let respuesta = window.confirm('¿Está seguro de eliminar este empleado?');
+}
+
+//Elimina el empleado seleccionado
+async function eliminar(){
+
+    const raw = localStorage.getItem('user');
+    const parsedUser = JSON.parse(raw);
+    const username = parsedUser.username
+    const ipAdress = parsedUser.IP
+
+    const nombreEmpleado = 'Jeffrey Watson';  //falta de alguna manera seleccionar empleado este solo para prueba****************
+
+    let docId = await getDocumentoIdentidad(nombreEmpleado); 
+
+    let respuesta = window.confirm('Valor Documento Identidad: '
+                                    + docId 
+                                    + '\nNombre: '
+                                    + nombreEmpleado 
+                                    +'\n¿Está seguro de eliminar este empleado?');
     if (respuesta === true) {
-        //fetch al SP de Eliminar
+        eliminarAfirmado(username,ipAdress,nombreEmpleado); 
     } else { 
-        window.alert('Eliminación cancelada');
+        eliminarCancelado(username,ipAdress,nombreEmpleado);
     }
 }
 
@@ -55,4 +87,41 @@ async function listarEmpleados() {
     catch (error) {
         console.error("Error al obtener empleados:", error);
     }   
+}
+
+
+//Modificar atributo 'EsActivo' del empleado en la BD por 0 para eliminarlo
+async function eliminarAfirmado(username,IpAdress,nombre){
+    try {
+        const response = await fetch('/principal/eliminarEmpleado', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({nombre,username,IpAdress})
+            });
+          
+        const data = await response.json();
+    } catch (error) {
+        alert('Error calling SP: ' + error);
+    }
+
+}
+
+//Añadir evento a tabla evento
+async function eliminarCancelado(username,IpAdress,nombre){
+    try {
+        const response = await fetch('/principal/cancelEliminar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({nombre,username,IpAdress})
+            });
+          
+        const data = await response.json();
+        window.alert('Eliminación cancelada');
+    } catch (error) {
+        alert('Error calling SP: ' + error);
+    }
 }

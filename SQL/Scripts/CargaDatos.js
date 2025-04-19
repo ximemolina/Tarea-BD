@@ -38,7 +38,7 @@ try {
     console.log("✅ Procedimiento ejecutado.");
     console.log(result.recordset);
 } catch (err) {
-    console.error("❌ Error al ejecutar en SQL:", err.message);
+    console.error("Error al ejecutar en SQL:", err.message);
 }
 
 export async function conectarDB() { //conexión con base de datos
