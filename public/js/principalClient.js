@@ -48,11 +48,9 @@ async function eliminar(){
     const username = parsedUser.username
     const ipAdress = parsedUser.IP
 
-    const nombreEmpleado = 'Susana Feng'; //falta de alguna manera seleccionar empleado este solo para prueba*
-    
-    /*const empleado = localStorage.getItem('empleado');
+    const empleado = localStorage.getItem('empleado');
     const parsedEmpleado = JSON.parse(empleado);
-    const nombreEmpleado = parsedEmpleado.nombre;*/
+    const nombreEmpleado = parsedEmpleado.nombre;
 
     let docId = await getDocumentoIdentidad(nombreEmpleado); 
 
@@ -105,7 +103,9 @@ function assignEvtCheckbox() {
                 }
             });
             let empleadoSeleccionado = obtenerFilaSeleccionada();
-            localStorage.setItem('empleado', JSON.stringify({nombre: empleadoSeleccionado[1]}));
+            if (empleadoSeleccionado) {
+                localStorage.setItem('empleado', JSON.stringify({nombre: empleadoSeleccionado[1]}));
+            }
             //console.log("Local storage", localStorage.getItem('empleado'));
             return empleadoSeleccionado;
         });
