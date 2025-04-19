@@ -4,6 +4,11 @@ const btnModificar = document.getElementById("btnModificar");
 const btnConsultar = document.getElementById("btnConsultar");
 const btnListarMovi = document.getElementById("btnListarMovi");
 
+const raw = localStorage.getItem('user');
+const parsedUser = JSON.parse(raw);
+const username = parsedUser.username
+const ipAdress = parsedUser.IP
+
 btnInsertar.addEventListener("click", insertar);
 btnEliminar.addEventListener("click", eliminar);
 btnModificar.addEventListener("click", modificar);
@@ -42,11 +47,6 @@ async function getDocumentoIdentidad(nombre){
 
 //Elimina el empleado seleccionado
 async function eliminar(){
-
-    const raw = localStorage.getItem('user');
-    const parsedUser = JSON.parse(raw);
-    const username = parsedUser.username
-    const ipAdress = parsedUser.IP
 
     const empleado = localStorage.getItem('empleado');
     const parsedEmpleado = JSON.parse(empleado);
@@ -145,6 +145,8 @@ async function eliminarAfirmado(username,IpAdress,nombre){
             });
           
         const data = await response.json();
+        alert('EL empleado ha sido eliminado');
+        listarEmpleados();
     } catch (error) {
         alert('Error calling SP: ' + error);
     }
