@@ -1,4 +1,4 @@
-
+const btnRetornar = document.getElementById("btnAtras");
 
 const raw = localStorage.getItem('user');
 const parsedUser = JSON.parse(raw);
@@ -8,9 +8,18 @@ const empleado = localStorage.getItem('empleado');
 const parsedEmpleado = JSON.parse(empleado);
 const nombreEmpleado = parsedEmpleado.nombre;
 
+btnRetornar.addEventListener("click", retornar);
+
 window.addEventListener('DOMContentLoaded', () => {
     listarMovimientos();
   });
+
+
+//despliega pag principal y vacía localStorage de empleado
+function retornar(){
+  localStorage.setItem('empleado', JSON.stringify({}));
+  window.location.href = 'http://localhost:3300/principal/ventanaPrincipal'; 
+}
 
 //Muestra todos los movimientos del empleado de manera descendente de acuerdo a la fecha
 async function listarMovimientos(){
@@ -24,7 +33,6 @@ async function listarMovimientos(){
       });
   
       const data = await response.json();
-      console.error(data.primerSelect)
       const texto = 'Nombre de empleado: ' 
                     + data.primerSelect[0].Nombre 
                     + '. Valor Documento Identidad: ' 
