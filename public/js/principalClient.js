@@ -13,7 +13,7 @@ btnInsertar.addEventListener("click", insertar);
 btnEliminar.addEventListener("click", eliminar);
 btnModificar.addEventListener("click", modificar);
 btnConsultar.addEventListener("click", consultar);
-btnConsultar.addEventListener("click", listarMovimientos);
+btnListarMovi.addEventListener("click", listarMovimientos);
 
 window.addEventListener('DOMContentLoaded', () => {
     listarEmpleados();
@@ -75,7 +75,7 @@ function consultar(){
 }
 
 function listarMovimientos() {
-
+    window.location.href = 'http://localhost:3300/movimientos/scrMovimientos';
 }
 
 /////////////////////////// FUNCIONES AUXILIARES ///////////////////////////
