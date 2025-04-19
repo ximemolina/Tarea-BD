@@ -2,12 +2,20 @@ const btnInsertar = document.getElementById("btnInsertar");
 const btnEliminar = document.getElementById("btnEliminar");
 const btnModificar = document.getElementById("btnModificar");
 const btnConsultar = document.getElementById("btnConsultar");
+const btnListarMovi = document.getElementById("btnListarMovi");
 
 btnInsertar.addEventListener("click", insertar);
 btnEliminar.addEventListener("click", eliminar);
 btnModificar.addEventListener("click", modificar);
 btnConsultar.addEventListener("click", consultar);
+btnConsultar.addEventListener("click", listarMovimientos);
 
+window.addEventListener('DOMContentLoaded', () => {
+    listarEmpleados();
+  });
+
+/////////////////////////// FUNCIONES PRINCIPALES ///////////////////////////
+//Inserta un nuevo empleado
 function insertar(){
 
 }
@@ -30,4 +38,21 @@ function modificar(){
 
 function consultar(){
     
+}
+
+function listarMovimientos() {
+    
+}
+
+/////////////////////////// FUNCIONES AUXILIARES ///////////////////////////
+//Carga la tabla a la vista
+async function listarEmpleados() {
+    try {
+        const response = await fetch('/principal/listarEmpleados');
+        const tablaHTML = await response.text();
+        document.getElementById("tablaEmpleados").innerHTML = tablaHTML; // Insertar en el HTML
+    } 
+    catch (error) {
+        console.error("Error al obtener empleados:", error);
+    }   
 }
