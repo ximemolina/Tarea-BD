@@ -20,32 +20,34 @@ export async function listarEmpleados() {
 // Genera la tabla traida de la BD en HTML
 export function generarTabla(tabla) {
     let tableHTML = `
-        <table>
-            <thead>
-                <tr>
-                    <th>Documento de identificación</th>
-                    <th>Nombre</th>
-                    <th>Fecha de ingreso</th>
-                    <th>Seleccionar</th>
-                </tr>
-            </thead>
-            <tbody>
+        <div class="relative overflow-hidden shadow-md rounded-lg">
+            <table class="table-fixed w-full text-left">
+                <thead class="uppercase bg-[#2856b3] text-[#ffffff]" style="background-color: #2856b3; color: #ffffff;">
+                    <tr>
+                        <td class="py-2 border border-gray-200 text-center  p-4" contenteditable="true">Documento de identidad</td>
+                        <td class="py-2 border border-gray-200 text-center  p-4" contenteditable="true">NOMBRE</td>
+                        <td class="py-2 border border-gray-200 text-center  p-4" contenteditable="true">FECHA DE INGRESO</td>
+                        <td contenteditable="true" class="py-2 border border-gray-200 text-center  p-4">sELECCIONAR</td>
+                    </tr>
+                </thead>
+            <tbody class="bg-white text-gray-500 bg-[#FFFFFF] text-[#6b7280]" style="background-color: #FFFFFF; color: #6b7280;">
     `;
 
     tabla.forEach(item => {
         tableHTML += `
-            <tr>
-                <td>${item.Identificacion}</td>
-                <td>${item.Nombre}</td>
-                <td>${item.Ingreso}</td>
-                <td><input type="checkbox" class="fila-checkbox" value="${item.Nombre}">></td>
+            <tr class=" py-0">
+                <td class=" py-0 border border-gray-200 text-center  p-4" contenteditable="true">${item.Identificacion}</td>
+                <td class=" py-0 border border-gray-200 text-center  p-4" contenteditable="true">${item.Nombre}</td>
+                <td class=" py-0 border border-gray-200 text-center  p-4" contenteditable="true">${item.Ingreso}</td>
+                <td class=" py-0 border border-gray-200 text-center  p-4" contenteditable="true"><input type="checkbox" class="fila-checkbox" value="${item.Nombre}"></td>
             </tr>
         `;
     });
 
     tableHTML += `
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     `;
 
     return tableHTML;
