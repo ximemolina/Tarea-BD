@@ -24,10 +24,10 @@ export function generarTabla(tabla) {
             <table class="table-fixed w-full text-left">
                 <thead class="uppercase bg-[#2856b3] text-[#ffffff]" style="background-color: #2856b3; color: #ffffff;">
                     <tr>
-                        <td class="py-2 border border-gray-200 text-center  p-4" contenteditable="true">Documento de identidad</td>
+                        <td class="py-2 border border-gray-200 text-center  p-4" contenteditable="true">DOCUMENTO DE INDENTIDAD</td>
                         <td class="py-2 border border-gray-200 text-center  p-4" contenteditable="true">NOMBRE</td>
                         <td class="py-2 border border-gray-200 text-center  p-4" contenteditable="true">FECHA DE INGRESO</td>
-                        <td contenteditable="true" class="py-2 border border-gray-200 text-center  p-4">sELECCIONAR</td>
+                        <td contenteditable="true" class="py-2 border border-gray-200 text-center  p-4">SELECCIONAR</td>
                     </tr>
                 </thead>
             <tbody class="bg-white text-gray-500 bg-[#FFFFFF] text-[#6b7280]" style="background-color: #FFFFFF; color: #6b7280;">

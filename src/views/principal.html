@@ -9,27 +9,24 @@
 
 </head>
 <body class="flex h-screen items-center justify-center bg-gray-100">
-    <div class="w-3/4 rounded-lg bg-white p-6 shadow-md">
-      <!-- Barra superior -->
-      <div class="mb-4 flex items-center justify-between">
-        <button class="text-2xl text-gray-700">&larr;</button>
-        <div class="flex items-center rounded-md border px-2">
-          <input type="text" placeholder="Buscar..." class="px-2 py-1 outline-none" />
-          <button class="px-2 text-gray-500">&#128269;</button>
-        </div>
-      </div>
+  <div class="rounded-lg relative overflow-hidden">
+    <button id="btnSalir" class="h-8 w-32 rounded-lg text-lg font-bold float justify-center bg-[#314262] text-[#ffffff] uppercase">Salir</button>
   
-      <!-- Tabla -->
-      <div id ="tablaEmpleados" class = "ml-4 mr-4"></div>
+    <input id="inputBuscar" placeholder="Buscar..." autocomplete="off" class="rounded-lg px-5 py-2.5 text-lg font-bold border border-[#cccccc] bg-[#ffffff] text-[#b6b6b6] focus:outline focus:outline-8 focus:outline-offset-4 focus:outline-[#aaaaaa]" />
+  
+    <button id="btnFiltrar" class="font-bold rounded-lg text-lg w-32 h-8 justify-center bg-[#314262] text-[#ffffff] uppercase">FILTRAR</button>
+  </div>
+  
+    <!-- Tabla -->
+    <div id ="tablaEmpleados" class = "ml-4 mr-4"></div>
   
       <!-- Botones -->
-      <div class="flex space-x-4">
-        <button type="button" id ="btnInsertar" class="btn-azul">Insertar</button>
-        <button type="button" id ="btnEliminar" class="btn-rojo">Eliminar</button>
-        <button type="button" id ="btnModificar" class="btn-azul">Modificar</button>
-        <button type="button" id ="btnConsultar" class="btn-azul">Consultar</button>
-        <button type="button" id ="btnListarMovi" class="btn-azul">Listar movimientos</button>
-      </div>
+    <div class="rounded-lg relative overflow-hidden">
+      <button id="btnInsertar" class="h-8 w-48 rounded-lg text-lg font-bold justify-center bg-[#265fbb] text-[#ffffff] uppercase">Insertar</button>
+      <button id="btnEliminar" class="h-8 w-48 rounded-lg text-lg font-bold justify-center bg-[#cd1717] text-[#ffffff] uppercase">Eliminar</button>
+      <button id="btnModificar" class="h-8 w-48 rounded-lg text-lg font-bold justify-center bg-[#265fbb] text-[#ffffff] uppercase">Modificar</button>
+      <button id="btnConsultar" class="h-8 w-48 rounded-lg text-lg font-bold justify-center bg-[#265fbb] text-[#ffffff] uppercase">Consultar</button>
+      <button id="btnListarMovi" class="h-8 w-64 rounded-lg text-lg font-bold justify-center bg-[#265fbb] text-[#ffffff] uppercase">Listar movimientos</button>
     </div>
   </body>
 </html>
