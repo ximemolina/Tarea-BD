@@ -15,8 +15,13 @@ router.post('/eliminarEmpleado', principalController.eliminarEmpleado)
 //ruta para actualizar evento de cancelar eliminacion
 router.post('/cancelEliminar', principalController.cancelEliminar)
 
+//ruta para listar todos los empleados activos
 router.get('/listarEmpleados', principalController.listarEmpleados);
 
-router.get('/obtenerFilaSeleccionada', principalController.obtenerFilaSeleccionada);
+//ruta para listar todos los empleados activos por nombre
+router.get('/listarEmpleadosNombre', principalController.listarEmpleadosNombre);
+
+//ruta para listar todos los empleados activos por documento de identificacion
+router.get('/listarEmpleadosNombreId', principalController.listarEmpleadosId);
 
 export default router;

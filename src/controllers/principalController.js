@@ -23,15 +23,31 @@ export const listarEmpleados = async (req,res) => {
     }
 };
 
-export const obtenerFilaSeleccionada = async (req,res) => {
-    try {
-        let empleadoSeleccionado = principalFunc.obtenerFilaSeleccionada();
-        return empleadoSeleccionado;
+// Controlador para enviar la tabla por nombre del BD como HTML
+export const listarEmpleadosNombre = async (req,res) => {
+    const { input } = req.body;
+    const tabla = await functionsDB.listarEmpleadosNombre(input);
+    if (tabla[0] == 0) {        //Revisa que el resultCode sea 0: exito
+        let tableHTML = functionsDB.generarTabla(tabla[1]);
+        res.send(tableHTML);
     }
-    catch (err) {
-        console.log("No se pudo obtener los datos de la fila seleccionada")
+    else {
+        console.log("Error: " + table[0], "No se pudo cargar la tabla")
     }
-}
+};
+
+// Controlador para enviar la tabla por documento de indentidad del BD como HTML
+export const listarEmpleadosId = async (req,res) => {
+    const { input } = req.body;
+    const tabla = await functionsDB.listarEmpleadosId(input);
+    if (tabla[0] == 0) {        //Revisa que el resultCode sea 0: exito
+        let tableHTML = functionsDB.generarTabla(tabla[1]);
+        res.send(tableHTML);
+    }
+    else {
+        console.log("Error: " + table[0], "No se pudo cargar la tabla")
+    }
+};
 
 export const getDocId = async (req,res) => {
     const { nombre } = req.body;

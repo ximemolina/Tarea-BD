@@ -3,6 +3,8 @@ const btnEliminar = document.getElementById("btnEliminar");
 const btnModificar = document.getElementById("btnModificar");
 const btnConsultar = document.getElementById("btnConsultar");
 const btnListarMovi = document.getElementById("btnListarMovi");
+const btnSalir = document.getElementById("btnSalir");
+const btnFiltrar = document.getElementById("btnFiltrar");
 
 const raw = localStorage.getItem('user');
 const parsedUser = JSON.parse(raw);
@@ -14,15 +16,56 @@ btnEliminar.addEventListener("click", eliminar);
 btnModificar.addEventListener("click", modificar);
 btnConsultar.addEventListener("click", consultar);
 btnListarMovi.addEventListener("click", listarMovimientos);
+btnSalir.addEventListener("click", regresarLogin);
+btnFiltrar.addEventListener("click", filtrarEmpleados);
 
 window.addEventListener('DOMContentLoaded', () => {
     listarEmpleados();
   });
 
 /////////////////////////// FUNCIONES PRINCIPALES ///////////////////////////
+//Regresa a la pagina del login
+function regresarLogin() {
+    try {
+        localStorage.clear();
+        window.location.href = 'http://localhost:3300/'; // Redirige a la nueva página
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+//Filtra la búsqueda en la tabla de empleados
+async function filtrarEmpleados() {
+    const busqueda = (document.getElementById("inputBuscar").value).trim();
+    const tipoBusqueda = validarEntrada(busqueda);
+    console.log("tipo", tipoBusqueda, busqueda);
+    switch (tipoBusqueda) {
+        case 1:
+            console.log("Busqueda por nombre");
+            try {
+                const response = await fetch('/principal/listarEmpleadosNombre');
+                const tablaHTML = await response.text();
+                document.getElementById("tablaEmpleados").innerHTML = tablaHTML; // Insertar en el HTML
+        
+                assignEvtCheckbox();
+            } 
+            catch (error) {
+                console.error("Error al obtener empleados:", error);
+            } 
+            console.log("Busqueda por nombre");
+            break;
+        case 2:
+            console.log("Busqueda por doc. id.");
+            break;
+        default:
+            console.log("Input inválido");
+            alert("Búsqueda inválida"); 
+    }
+}
+
 //Inserta un nuevo empleado
 function insertar(){
-
+    
 }
 
 //Conseguir el documento de identidad del empleado para poder desplegarlo en alerta de eliminar
@@ -79,6 +122,20 @@ function listarMovimientos() {
 }
 
 /////////////////////////// FUNCIONES AUXILIARES ///////////////////////////
+//Verifica el formato
+function validarEntrada(texto) {
+    const soloLetrasEspacios = /^[A-Za-z\s]+$/;  // Expresión para letras y espacios
+    const soloNumeros = /^\d+$/;  // Expresión para solo números
+
+    if (soloLetrasEspacios.test(texto)) {
+        return 1;
+    } else if (soloNumeros.test(texto)) {
+        return 2;
+    } else {
+        return -1;
+    }
+}
+
 //Carga la tabla a la vista
 async function listarEmpleados() {
     try {

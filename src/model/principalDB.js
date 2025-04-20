@@ -53,6 +53,40 @@ export function generarTabla(tabla) {
     return tableHTML;
 }
 
+// Ejecuta el sp para listar a todos los empleados activos por nombre
+export async function listarEmpleadosNombre(input) {
+    try {
+        let pool = await conectarDB();
+
+        let resultado = await pool.request()
+            .input('inNombre', sql.VarChar(64), input)
+            .output('outResultCode', sql.INT)
+            .execute('ListarEmpleadosNombre');
+
+        return [resultado.output.outResultCode, resultado.recordset];
+    }
+    catch (err) {
+        console.error('Error ejecutando el SP ListarEmpleadosNombre:', err)
+    }
+}
+
+// Ejecuta el sp para listar a todos los empleados activos por documento de identidad
+export async function listarEmpleadosId(input) {
+    try {
+        let pool = await conectarDB();
+
+        let resultado = await pool.request()
+            .input('inId', sql.VarChar(64), input)
+            .output('outResultCode', sql.INT)
+            .execute('ListarEmpleadosId');
+
+        return [resultado.output.outResultCode, resultado.recordset];
+    }
+    catch (err) {
+        console.error('Error ejecutando el SP ListarEmpleadosId:', err)
+    }
+}
+
 export async function getDocumentId(nombre) {
     try {
         let pool = await conectarDB();
