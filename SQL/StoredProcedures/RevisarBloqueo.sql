@@ -7,10 +7,10 @@ BEGIN
 
 	BEGIN TRY
 
-		SET @outResultCode=0; ---Código error 0 indica que no hubo error
+		SET @outResultCode=0; ---Cï¿½digo error 0 indica que no hubo error
 
 		---Revisar si hay un login deshabilitado en los ultimos diez minutos
-		SELECT COUNT(*)
+		SELECT COUNT(1)
 		FROM 
 			dbo.BitacoraEvento AS E
 		WHERE

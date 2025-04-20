@@ -10,11 +10,11 @@ BEGIN
 	BEGIN TRY
 		
 		DECLARE @IdTipoEvento INT=  1; ---Id tipo de evento de Login Exitoso
-		DECLARE @IdPostByUser INT; ---Id Usuario que está realizando el evento
-		DECLARE @Descripcion VARCHAR(1024)= ''; ---Descripción de Evento Ocurrido
+		DECLARE @IdPostByUser INT; ---Id Usuario que estï¿½ realizando el evento
+		DECLARE @Descripcion VARCHAR(1024)= ''; ---Descripciï¿½n de Evento Ocurrido
 		DECLARE @CantLogin INT; --Cantidad de logins No Exitosos en la ultima media hora
 
-		SET @outResultCode=0; ---Código error 0 indica que no hubo error
+		SET @outResultCode=0; ---Cï¿½digo error 0 indica que no hubo error
 		
 
 		---Revisar que usuario si exista en tabla Usuario
@@ -24,7 +24,7 @@ BEGIN
 			SET @IdPostByUser = 0;---Asigna id por default de user "no conocido"
 
 			---Cantidad de Logins No Exitosos que han habido en la ultima media hora
-			SET @CantLogin = ( SELECT COUNT(*)
+			SET @CantLogin = ( SELECT COUNT(1)
 								FROM 
 									dbo.BitacoraEvento AS E
 								WHERE
@@ -41,7 +41,7 @@ BEGIN
 
 				SET @outResultCode = 50003; ---Login Deshabilitado
 
-				INSERT dbo.BitacoraEvento( 	---Inserción de evento Login Deshabilitado a BitacoraEventos
+				INSERT dbo.BitacoraEvento( 	---Inserciï¿½n de evento Login Deshabilitado a BitacoraEventos
 					IdTipoEvento
 					,IdPostByUser
 					,Descripcion
@@ -72,7 +72,7 @@ BEGIN
 									+ '. Codigo de error: ' 
 									+ CONVERT( VARCHAR(64) , @outResultCode)); ---Busca y asigna description de error
 			
-				INSERT dbo.BitacoraEvento( 	---Inserción de evento Login No Exitoso a BitacoraEventos
+				INSERT dbo.BitacoraEvento( 	---Inserciï¿½n de evento Login No Exitoso a BitacoraEventos
 					IdTipoEvento
 					,IdPostByUser
 					,Descripcion
@@ -106,7 +106,7 @@ BEGIN
 		BEGIN
 			
 			---Cantidad de Logins No Exitosos que han habido en la ultima media hora
-			SET @CantLogin = ( SELECT COUNT(*)
+			SET @CantLogin = ( SELECT COUNT(1)
 								FROM 
 									dbo.BitacoraEvento AS E
 								WHERE
@@ -123,7 +123,7 @@ BEGIN
 
 				SET @outResultCode = 50003; ---Login Deshabilitado
 
-				INSERT dbo.BitacoraEvento( 	---Inserción de evento Login Deshabilitado a BitacoraEventos
+				INSERT dbo.BitacoraEvento( 	---Inserciï¿½n de evento Login Deshabilitado a BitacoraEventos
 					IdTipoEvento
 					,IdPostByUser
 					,Descripcion
@@ -154,7 +154,7 @@ BEGIN
 									+ '. Codigo de error: ' 
 									+ CONVERT( VARCHAR(64) , @outResultCode )); ---Busca y asigna description de error
 			
-				INSERT dbo.BitacoraEvento( 	---Inserción de evento Login No Exitoso a BitacoraEventos
+				INSERT dbo.BitacoraEvento( 	---Inserciï¿½n de evento Login No Exitoso a BitacoraEventos
 					IdTipoEvento
 					,IdPostByUser
 					,Descripcion
@@ -174,7 +174,7 @@ BEGIN
 
 		---Caso de Login Exitoso
 
-		INSERT dbo.BitacoraEvento( 		---Inserción de evento Login Exitoso a BitacoraEventos
+		INSERT dbo.BitacoraEvento( 		---Inserciï¿½n de evento Login Exitoso a BitacoraEventos
 			IdTipoEvento
 			,IdPostByUser
 			,Descripcion
