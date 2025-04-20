@@ -35,9 +35,9 @@ async function listarMovimientos(){
       const data = await response.json();
       const texto = 'Nombre de empleado: ' 
                     + data.primerSelect[0].Nombre 
-                    + '. Valor Documento Identidad: ' 
+                    + ' Valor Documento Identidad: ' 
                     + data.primerSelect[0].ValorDocumentoIdentidad
-                    + '. Saldo de Vacaciones: '
+                    + ' Saldo de Vacaciones: '
                     + data.primerSelect[0].SaldoVacaciones
       document.getElementById("contenedor-tabla").innerHTML += data.tabla;
       document.getElementById("datos").textContent = texto;
