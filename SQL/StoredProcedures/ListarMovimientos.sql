@@ -43,7 +43,7 @@ BEGIN
 			@inNombre = E.Nombre
 
 		ORDER BY
-			Fecha DESC
+			PostTime DESC
 
 		SET @outResultCode = 0; --Código éxito
 
