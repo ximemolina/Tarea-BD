@@ -25,9 +25,18 @@ window.addEventListener('DOMContentLoaded', () => {
 
 /////////////////////////// FUNCIONES PRINCIPALES ///////////////////////////
 //Regresa a la pagina del login
-function regresarLogin() {
+async function regresarLogin() {
     try {
+        const nombreEvento = "Logout"
+        const response = await fetch('/principal/logout', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({username,ipAdress,nombreEvento})
+        });
         localStorage.clear();
+        const data = await response.json();
         window.location.href = 'http://localhost:3300/'; // Redirige a la nueva página
     } catch (error) {
         console.error('Error:', error);

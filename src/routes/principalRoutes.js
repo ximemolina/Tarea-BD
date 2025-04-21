@@ -24,4 +24,7 @@ router.get('/listarEmpleadosNombre', principalController.listarEmpleadosNombre);
 //ruta para listar todos los empleados activos por documento de identificacion
 router.get('/listarEmpleadosNombreId', principalController.listarEmpleadosId);
 
+//ruta para actualizar evento logout
+router.post('/logout', principalController.logout)
+
 export default router;

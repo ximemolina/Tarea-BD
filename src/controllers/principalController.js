@@ -66,3 +66,10 @@ export const cancelEliminar = async (req,res) => {
     const resultado = await functionsDB.cancelEliminar(nombre,username,IpAdress);
     res.json({resultado});   
 };
+
+
+export const logout = async (req,res) => {
+    const {username,ipAdress,nombreEvento} = req.body;
+    const resultado = await functionsDB.logout(username,ipAdress,nombreEvento);
+    res.json({resultado})
+};

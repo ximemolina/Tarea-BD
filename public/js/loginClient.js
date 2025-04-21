@@ -66,7 +66,6 @@ async function loginCorrecto(){
 
 //Revisa codigo que retorna el SP y decide que accion realizar
 function revCodigo(codigo) {
-    console.log("Codigo login", codigo);
     switch (codigo) {
 
         case 0: //Datos ingresados correctamente

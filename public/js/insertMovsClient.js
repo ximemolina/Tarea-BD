@@ -64,6 +64,21 @@ function limitarChecks(){
   });
 }
 
+//Muestra descripcion de error
+async function mostrarError(codigo){
+  const response = await fetch('/general/getError', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ codigo })
+    });
+
+    const data = await response.json();
+    resultado = data.resultado[0].Descripcion;
+    alert(resultado);
+}
+
 //Verifica que haya un movimiento checkeado y un monto numérico
 function validarInsertar(){
   const marcado = document.querySelector('#dropdownDefaultCheckbox input[type="checkbox"]:checked');
@@ -92,7 +107,10 @@ async function insertarMovimientos(){
         },
         body: JSON.stringify({nombreEmpleado,nombreMovimiento,monto,username,ipAdress})
       });
+      const data = await response.json();
 
+      if (data.codigoExito != 0) mostrarError(data.codigoExito);
+      
       //limpiar input y checkboxes
       const checkboxes = document.querySelectorAll('#dropdownDefaultCheckbox input[type="checkbox"]');
       checkboxes.forEach(checkbox => {
@@ -101,5 +119,7 @@ async function insertarMovimientos(){
       dropdownMenu.classList.toggle('hidden');
       inpInfo.value=""
 
+  }else {
+    alert("Ingrese el monto numérico y el tipo de movimiento deseado")
   }
 }

@@ -68,7 +68,7 @@ BEGIN
 
 				SET @Descripcion = ( 
 									'Numero de intento en los ultimos 30mins: ' 
-									+ CONVERT( VARCHAR , @CantLogin+1 ) 
+									+ CONVERT( VARCHAR(20) , @CantLogin+1 ) 
 									+ '. Codigo de error: ' 
 									+ CONVERT( VARCHAR(64) , @outResultCode)); ---Busca y asigna description de error
 			
@@ -150,7 +150,7 @@ BEGIN
 
 				SET @Descripcion = ( 
 									'Numero de intento en los ultimos 30mins: ' 
-									+ CONVERT( VARCHAR , @CantLogin+1 ) 
+									+ CONVERT( VARCHAR(20) , @CantLogin+1 ) 
 									+ '. Codigo de error: ' 
 									+ CONVERT( VARCHAR(64) , @outResultCode )); ---Busca y asigna description de error
 			
