@@ -1,4 +1,5 @@
 const btnRetornar = document.getElementById("btnAtras");
+const btnInsertar = document.getElementById("btnInsertar");
 
 const raw = localStorage.getItem('user');
 const parsedUser = JSON.parse(raw);
@@ -9,6 +10,7 @@ const parsedEmpleado = JSON.parse(empleado);
 const nombreEmpleado = parsedEmpleado.nombre;
 
 btnRetornar.addEventListener("click", retornar);
+btnInsertar.addEventListener("click", insertar);
 
 window.addEventListener('DOMContentLoaded', () => {
     listarMovimientos();
@@ -20,6 +22,12 @@ function retornar(){
   localStorage.setItem('empleado', JSON.stringify({}));
   window.location.href = 'http://localhost:3300/principal/ventanaPrincipal'; 
 }
+
+//despliega pag de insertar movimientos
+function insertar(){
+  window.location.href = 'http://localhost:3300/movimientos/scrInsertar';
+}
+
 
 //Muestra todos los movimientos del empleado de manera descendente de acuerdo a la fecha
 async function listarMovimientos(){

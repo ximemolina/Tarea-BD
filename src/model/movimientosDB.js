@@ -20,3 +20,26 @@ export async function listarMovimientos(nombre) {
         console.error('Error ejecutando el SP ListarEmpleados:', err)
     }
 }
+
+
+export async function insertarMovimientos(nombreEmpleado, nombreMovimiento,monto,username,ipAdress) {
+    try {
+        let pool = await conectarDB();
+
+        let resultado = await pool.request()
+            .input('inNombre', sql.VarChar(64), nombreEmpleado)
+            .input('inNombreMovimiento', sql.VarChar(64), nombreMovimiento)
+            .input('inMonto', sql.INT, monto)
+            .input('inUsername', sql.VarChar(64), username)
+            .input('inIpAdress', sql.VarChar(64), ipAdress)
+            .output('outResultCode', sql.INT)
+            .execute('InsertarMovimiento');
+
+        let codigoExito = resultado.output.outResultCode;
+
+        return {codigoExito};
+    }
+    catch (err) {
+        console.error('Error ejecutando el SP ListarEmpleados:', err)
+    }   
+}

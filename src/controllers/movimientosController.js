@@ -19,3 +19,13 @@ export const listar = async (req, res) => {
     const primerSelect = resultado.primerSelect
     res.json({tabla, primerSelect});       
 };
+
+export const scrInsertar = async (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/insertMovs.html'));
+};
+
+export const insertar = async (req, res) => {
+    const {nombreEmpleado, nombreMovimiento,monto,username,ipAdress} = req.body;
+    const resultado = await functionsDB.insertarMovimientos(nombreEmpleado, nombreMovimiento,monto,username,ipAdress);
+    res.json(resultado);  
+};
