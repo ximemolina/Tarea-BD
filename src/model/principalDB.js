@@ -124,7 +124,6 @@ export async function eliminarEmpleado(nombre,username,ipAdress){
 export async function cancelEliminar(nombre,username,ipAdress){
     try {
         let pool = await conectarDB();
-        console.log(nombre+username+ipAdress);
         let resultado = await pool.request()
             .input('inNombre', sql.VarChar(64), nombre)
             .input('inUsername', sql.VarChar(64), username)

@@ -1,7 +1,7 @@
 USE [Database]
 GO
 
-/****** Object:  StoredProcedure [dbo].[InsertarMovimiento]    Script Date: 20/4/2025 15:28:36 ******/
+/****** Object:  StoredProcedure [dbo].[InsertarMovimiento]    Script Date: 21/4/2025 11:59:14 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -29,9 +29,11 @@ BEGIN
 		DECLARE @descripcionError VARCHAR(1024); ---Descripcion de codigo de error
 		DECLARE @valorDocId INT; ---Valor Documento de Identidad del Empleado
 		DECLARE @fecha DATE; -- Fecha actual con formato YYYY-MM-DD
+		DECLARE @idTipoEvento INT; ---Tipo Evento ocurriendo
 
 		SET @outResultCode = 0; --Código éxito
-
+		SET @idTipoEvento = 14; ---Tipo Evento Insertar Movimiento Exitoso
+		
 		---Obtener valor DocId del Empleado
 		SELECT 
 			@valorDocId = E.ValorDocumentoIdentidad,
@@ -74,6 +76,7 @@ BEGIN
 		BEGIN
 				
 			SET @outResultCode = 50011; --Error : Monto del movimiento rechazado por saldo negativo
+			SET @idTipoEvento = 13; ---Tipo Evento Intento Insertar Movimiento Exitoso
 
 			SELECT
 				@descripcionError = E.Descripcion
@@ -105,17 +108,15 @@ BEGIN
 				,PostInIp
 				,PostTime )
 			SELECT
-				TM.Id
+				@idTipoEvento
 				, @descripcion
 				, U.Id 
 				, @inIpAdress 
 				, GETDATE()
 			FROM 
-				dbo.TipoMovimiento AS TM
-				,dbo.Usuario AS U
+				dbo.Usuario AS U
 			WHERE
-				TM.Nombre = @inNombreMovimiento
-				AND U.Username = @inUsername
+				U.Username = @inUsername
 
 			END;
 		ELSE
@@ -148,17 +149,15 @@ BEGIN
 					,PostInIp
 					,PostTime )
 				SELECT
-					TM.Id
+					@idTipoEvento
 					, @descripcion
 					, U.Id 
 					, @inIpAdress 
 					, GETDATE()
 				FROM 
-					dbo.TipoMovimiento AS TM
-					,dbo.Usuario AS U
+					dbo.Usuario AS U
 				WHERE
-					TM.Nombre = @inNombreMovimiento
-					AND U.Username = @inUsername
+					U.Username = @inUsername
 
 				---Insertar movimiento a tabla de movimientos
 				INSERT INTO dbo.Movimiento (
