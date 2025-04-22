@@ -57,12 +57,11 @@ export function generarTabla(tabla) {
 export async function listarEmpleadosNombre(input) {
     try {
         let pool = await conectarDB();
-
         let resultado = await pool.request()
-            .input('inNombre', sql.VarChar(64), input)
-            .output('outResultCode', sql.INT)
-            .execute('ListarEmpleadosNombre');
-
+        .input('inNombre', sql.VarChar(64), input)
+        .output('outResultCode', sql.INT)
+        .execute('ListarEmpleadosNombre');
+        
         return [resultado.output.outResultCode, resultado.recordset];
     }
     catch (err) {

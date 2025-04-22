@@ -47,28 +47,19 @@ async function regresarLogin() {
 async function filtrarEmpleados() {
     const busqueda = (document.getElementById("inputBuscar").value).trim();
     const tipoBusqueda = validarEntrada(busqueda);
-    console.log("tipo", tipoBusqueda, busqueda);
+
     switch (tipoBusqueda) {
         case 1:
             console.log("Busqueda por nombre");
-            try {
-                const response = await fetch('/principal/listarEmpleadosNombre');
-                const tablaHTML = await response.text();
-                document.getElementById("tablaEmpleados").innerHTML = tablaHTML; // Insertar en el HTML
-        
-                assignEvtCheckbox();
-            } 
-            catch (error) {
-                console.error("Error al obtener empleados:", error);
-            } 
-            console.log("Busqueda por nombre");
+            listarEmpleadosNombre(busqueda);
             break;
         case 2:
             console.log("Busqueda por doc. id.");
+            listarEmpleadosId(busqueda);
             break;
         default:
             console.log("Input inválido");
-            alert("Búsqueda inválida"); 
+            listarEmpleados(); 
     }
 }
 
@@ -143,6 +134,46 @@ function validarEntrada(texto) {
     } else {
         return -1;
     }
+}
+
+//Carga la tabla filtrada por nombre
+async function listarEmpleadosNombre(input) {
+    try {
+        const response = await fetch('/principal/listarEmpleadosNombre', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ input })
+        });
+        const tablaHTML = await response.text();
+        document.getElementById("tablaEmpleados").innerHTML = tablaHTML; // Insertar en el HTML
+
+        assignEvtCheckbox();
+    } 
+    catch (error) {
+        console.error("Error al obtener empleados:", error);
+    } 
+}
+
+//Carga la tabla filtrada por documento identidad
+async function listarEmpleadosId(input) {
+    try {
+        const response = await fetch('/principal/listarEmpleadosId', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ input })
+        });
+        const tablaHTML = await response.text();
+        document.getElementById("tablaEmpleados").innerHTML = tablaHTML; // Insertar en el HTML
+
+        assignEvtCheckbox();
+    } 
+    catch (error) {
+        console.error("Error al obtener empleados:", error);
+    } 
 }
 
 //Carga la tabla a la vista

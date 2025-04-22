@@ -19,10 +19,10 @@ router.post('/cancelEliminar', principalController.cancelEliminar)
 router.get('/listarEmpleados', principalController.listarEmpleados);
 
 //ruta para listar todos los empleados activos por nombre
-router.get('/listarEmpleadosNombre', principalController.listarEmpleadosNombre);
+router.post('/listarEmpleadosNombre', principalController.listarEmpleadosNombre);
 
 //ruta para listar todos los empleados activos por documento de identificacion
-router.get('/listarEmpleadosNombreId', principalController.listarEmpleadosId);
+router.post('/listarEmpleadosId', principalController.listarEmpleadosId);
 
 //ruta para actualizar evento logout
 router.post('/logout', principalController.logout)

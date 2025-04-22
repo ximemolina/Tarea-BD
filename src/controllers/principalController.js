@@ -19,7 +19,7 @@ export const listarEmpleados = async (req,res) => {
         res.send(tableHTML);
     }
     else {
-        console.log("Error: " + table[0], "No se pudo cargar la tabla")
+        console.log("Error: " + tabla[0], "No se pudo cargar la tabla")
     }
 };
 
@@ -32,20 +32,22 @@ export const listarEmpleadosNombre = async (req,res) => {
         res.send(tableHTML);
     }
     else {
-        console.log("Error: " + table[0], "No se pudo cargar la tabla")
+        console.log("Error: " + tabla[0], "No se pudo cargar la tabla")
     }
 };
+
+
 
 // Controlador para enviar la tabla por documento de indentidad del BD como HTML
 export const listarEmpleadosId = async (req,res) => {
     const { input } = req.body;
-    const tabla = await functionsDB.listarEmpleadosId(input);
+    let tabla = await functionsDB.listarEmpleadosId(input);
     if (tabla[0] == 0) {        //Revisa que el resultCode sea 0: exito
         let tableHTML = functionsDB.generarTabla(tabla[1]);
         res.send(tableHTML);
     }
     else {
-        console.log("Error: " + table[0], "No se pudo cargar la tabla")
+        console.log("Error: " + tabla[0], "No se pudo cargar la tabla")
     }
 };
 
