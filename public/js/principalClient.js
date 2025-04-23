@@ -114,7 +114,17 @@ function modificar(){
 }
 
 function consultar(){
-    
+    const empleado = localStorage.getItem('empleado');
+    if (empleado) {
+        try {
+            window.location.href = 'http://localhost:3300/consultar/ventanaConsultar'; // Redirige a la nueva página
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+    else {
+        window.alert("Debe seleccionar a un empleado");
+    }
 }
 
 function listarMovimientos() {
@@ -203,7 +213,7 @@ function assignEvtCheckbox() {
             if (empleadoSeleccionado) {
                 localStorage.setItem('empleado', JSON.stringify({nombre: empleadoSeleccionado[1]}));
             }
-            //console.log("Local storage", localStorage.getItem('empleado'));
+            console.log("Local storage", localStorage.getItem('empleado'));
             return empleadoSeleccionado;
         });
     });
