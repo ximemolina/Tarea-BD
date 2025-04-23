@@ -20,7 +20,7 @@ export async function listarEmpleados() {
 // Genera la tabla traida de la BD en HTML
 export function generarTabla(tabla) {
     let tableHTML = `
-        <div class="relative overflow-hidden shadow-md rounded-lg">
+        <div class="shadow-md rounded-lg relative">
             <table class="table-fixed w-full text-left">
                 <thead class="uppercase bg-[#2856b3] text-[#ffffff]" style="background-color: #2856b3; color: #ffffff;">
                     <tr>
