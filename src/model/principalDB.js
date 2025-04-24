@@ -34,11 +34,18 @@ export function generarTabla(tabla) {
     `;
 
     tabla.forEach(item => {
+        // Extraer y formatear la fecha del campo 'Ingreso'
+        const fechaFormateada = new Date(item.Ingreso).toLocaleDateString('es-ES', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        });
+    
         tableHTML += `
             <tr class=" py-0">
                 <td class=" py-0 border border-gray-200 text-center  p-4" contenteditable="true">${item.Identificacion}</td>
                 <td class=" py-0 border border-gray-200 text-center  p-4" contenteditable="true">${item.Nombre}</td>
-                <td class=" py-0 border border-gray-200 text-center  p-4" contenteditable="true">${item.Ingreso}</td>
+                <td class=" py-0 border border-gray-200 text-center  p-4" contenteditable="true">${fechaFormateada}</td>
                 <td class=" py-0 border border-gray-200 text-center  p-4" contenteditable="true"><input type="checkbox" class="fila-checkbox" value="${item.Nombre}"></td>
             </tr>
         `;
@@ -61,7 +68,7 @@ export async function listarEmpleadosNombre(input, username, ipAdress) {
         .input('inNombre', sql.VarChar(64), input)
         .input('inUsername', sql.VarChar(64), username)
         .input('inIpAdress', sql.VarChar(64), ipAdress)
-        .output('outResultCode', sql.INT)
+        .output('outResultCode', sql.Int)
         .execute('ListarEmpleadosNombre');
         
         return [resultado.output.outResultCode, resultado.recordset];
@@ -80,7 +87,7 @@ export async function listarEmpleadosId(input, username, ipAdress) {
             .input('inId', sql.VarChar(64), input)
             .input('inUsername', sql.VarChar(64), username)
             .input('inIpAdress', sql.VarChar(64), ipAdress)
-            .output('outResultCode', sql.INT)
+            .output('outResultCode', sql.Int)
             .execute('ListarEmpleadosId');
 
         return [resultado.output.outResultCode, resultado.recordset];
