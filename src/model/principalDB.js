@@ -54,11 +54,13 @@ export function generarTabla(tabla) {
 }
 
 // Ejecuta el sp para listar a todos los empleados activos por nombre
-export async function listarEmpleadosNombre(input) {
+export async function listarEmpleadosNombre(input, username, ipAdress) {
     try {
         let pool = await conectarDB();
         let resultado = await pool.request()
         .input('inNombre', sql.VarChar(64), input)
+        .input('inUsername', sql.VarChar(64), username)
+        .input('inIpAdress', sql.VarChar(64), ipAdress)
         .output('outResultCode', sql.INT)
         .execute('ListarEmpleadosNombre');
         
@@ -70,12 +72,14 @@ export async function listarEmpleadosNombre(input) {
 }
 
 // Ejecuta el sp para listar a todos los empleados activos por documento de identidad
-export async function listarEmpleadosId(input) {
+export async function listarEmpleadosId(input, username, ipAdress) {
     try {
         let pool = await conectarDB();
 
         let resultado = await pool.request()
             .input('inId', sql.VarChar(64), input)
+            .input('inUsername', sql.VarChar(64), username)
+            .input('inIpAdress', sql.VarChar(64), ipAdress)
             .output('outResultCode', sql.INT)
             .execute('ListarEmpleadosId');
 

@@ -46,21 +46,21 @@ async function regresarLogin() {
 //Filtra la búsqueda en la tabla de empleados
 async function filtrarEmpleados() {
     const busqueda = (document.getElementById("inputBuscar").value).trim();
-    const tipoBusqueda = validarEntrada(busqueda);
+    const tipoBusqueda = validarPrimerCaracter(busqueda);
 
     switch (tipoBusqueda) {
         case 1:
-            console.log("Busqueda por nombre");
-            listarEmpleadosNombre(busqueda);
-            break;
-        case 2:
-            console.log("Busqueda por doc. id.");
+            console.log("Filtrar por documento identidad");
             listarEmpleadosId(busqueda);
             break;
+        case 2:
+            console.log("Filtrar por nombre");
+            listarEmpleadosNombre(busqueda);
+            break;
         default:
-            console.log("Input inválido");
-            listarEmpleados(); 
+            listarEmpleados();
     }
+    
 }
 
 //Inserta un nuevo empleado
@@ -132,18 +132,14 @@ function listarMovimientos() {
 }
 
 /////////////////////////// FUNCIONES AUXILIARES ///////////////////////////
-//Verifica el formato
-function validarEntrada(texto) {
-    const soloLetrasEspacios = /^[A-Za-z\s]+$/;  // Expresión para letras y espacios
-    const soloNumeros = /^\d+$/;  // Expresión para solo números
-
-    if (soloLetrasEspacios.test(texto)) {
+//Valida primer caracter, si es letra es por nombre, si es numero por documento
+function validarPrimerCaracter(cadena) {
+    const primerCaracter = cadena[0];
+    if (/^[0-9]$/.test(primerCaracter)) {
         return 1;
-    } else if (soloNumeros.test(texto)) {
+    } else if (/^[A-Za-z]$/.test(primerCaracter)) {
         return 2;
-    } else {
-        return -1;
-    }
+    } 
 }
 
 //Carga la tabla filtrada por nombre
@@ -154,12 +150,20 @@ async function listarEmpleadosNombre(input) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ input })
+            body: JSON.stringify({ input, username, ipAdress })
         });
-        const tablaHTML = await response.text();
-        document.getElementById("tablaEmpleados").innerHTML = tablaHTML; // Insertar en el HTML
+        const data = await response.json();
+        const outResultCode = data.outResultCode;
+        if (outResultCode == 0) {
+            const tablaHTML = data.tableHTML;
+            document.getElementById("tablaEmpleados").innerHTML = tablaHTML; // Insertar en el HTML
 
-        assignEvtCheckbox();
+            assignEvtCheckbox();
+        }
+        else {
+            console.log(outResultCode, "Nombre no alfabetico");
+            listarEmpleados();
+        }
     } 
     catch (error) {
         console.error("Error al obtener empleados:", error);
@@ -174,12 +178,20 @@ async function listarEmpleadosId(input) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ input })
+            body: JSON.stringify({ input, username, ipAdress })
         });
-        const tablaHTML = await response.text();
-        document.getElementById("tablaEmpleados").innerHTML = tablaHTML; // Insertar en el HTML
+        const data = await response.json();
+        const outResultCode = data.outResultCode;
+        if (outResultCode == 0) {
+            const tablaHTML = data.tableHTML;
+            document.getElementById("tablaEmpleados").innerHTML = tablaHTML; // Insertar en el HTML
 
-        assignEvtCheckbox();
+            assignEvtCheckbox();
+        }
+        else {
+            console.log(outResultCode, "Documento de indentidad invalido");
+            listarEmpleados();
+        }
     } 
     catch (error) {
         console.error("Error al obtener empleados:", error);

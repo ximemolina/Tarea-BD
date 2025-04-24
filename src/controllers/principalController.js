@@ -25,14 +25,17 @@ export const listarEmpleados = async (req,res) => {
 
 // Controlador para enviar la tabla por nombre del BD como HTML
 export const listarEmpleadosNombre = async (req,res) => {
-    const { input } = req.body;
-    const tabla = await functionsDB.listarEmpleadosNombre(input);
-    if (tabla[0] == 0) {        //Revisa que el resultCode sea 0: exito
-        let tableHTML = functionsDB.generarTabla(tabla[1]);
-        res.send(tableHTML);
+    const { input, username, ipAdress } = req.body;
+    const response = await functionsDB.listarEmpleadosNombre(input, username, ipAdress);
+    const outResultCode = response[0];
+    const recordset = response[1];
+    if (outResultCode == 0) {        //Revisa que el resultCode sea 0: exito
+        let tableHTML = functionsDB.generarTabla(recordset);
+        res.json({outResultCode, tableHTML});
     }
     else {
-        console.log("Error: " + tabla[0], "No se pudo cargar la tabla")
+        console.log("Error: " + outResultCode, "No se pudo cargar la tabla")
+        res.json({outResultCode});
     }
 };
 
@@ -40,14 +43,17 @@ export const listarEmpleadosNombre = async (req,res) => {
 
 // Controlador para enviar la tabla por documento de indentidad del BD como HTML
 export const listarEmpleadosId = async (req,res) => {
-    const { input } = req.body;
-    let tabla = await functionsDB.listarEmpleadosId(input);
-    if (tabla[0] == 0) {        //Revisa que el resultCode sea 0: exito
-        let tableHTML = functionsDB.generarTabla(tabla[1]);
-        res.send(tableHTML);
+    const { input, username, ipAdress } = req.body;
+    let response = await functionsDB.listarEmpleadosId(input, username, ipAdress);
+    const outResultCode = response[0];
+    const recordset = response[1];
+    if (outResultCode == 0) {        //Revisa que el resultCode sea 0: exito
+        let tableHTML = functionsDB.generarTabla(recordset);
+        res.json({outResultCode, tableHTML});
     }
     else {
-        console.log("Error: " + tabla[0], "No se pudo cargar la tabla")
+        console.log("Error: " + outResultCode, "No se pudo cargar la tabla")
+        res.json({outResultCode});
     }
 };
 
