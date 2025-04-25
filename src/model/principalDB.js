@@ -24,29 +24,28 @@ export function generarTabla(tabla) {
             <table class="table-fixed w-full text-left">
                 <thead class="uppercase bg-[#2856b3] text-[#ffffff]" style="background-color: #2856b3; color: #ffffff;">
                     <tr>
-                        <td class="py-2 border border-gray-200 text-center  p-4" contenteditable="true">DOCUMENTO DE INDENTIDAD</td>
-                        <td class="py-2 border border-gray-200 text-center  p-4" contenteditable="true">NOMBRE</td>
-                        <td class="py-2 border border-gray-200 text-center  p-4" contenteditable="true">FECHA DE INGRESO</td>
-                        <td contenteditable="true" class="py-2 border border-gray-200 text-center  p-4">SELECCIONAR</td>
+                        <td class="py-2 border border-gray-200 text-center p-4">DOCUMENTO DE IDENTIDAD</td>
+                        <td class="py-2 border border-gray-200 text-center p-4">NOMBRE</td>
+                        <td class="py-2 border border-gray-200 text-center p-4">FECHA DE INGRESO</td>
+                        <td class="py-2 border border-gray-200 text-center p-4">SELECCIONAR</td>
                     </tr>
                 </thead>
-            <tbody class="bg-white text-gray-500 bg-[#FFFFFF] text-[#6b7280]" style="background-color: #FFFFFF; color: #6b7280;">
+                <tbody class="bg-white text-gray-500 bg-[#FFFFFF] text-[#6b7280]" style="background-color: #FFFFFF; color: #6b7280;">
     `;
 
     tabla.forEach(item => {
-        // Extraer y formatear la fecha del campo 'Ingreso'
         const fechaFormateada = new Date(item.Ingreso).toLocaleDateString('es-ES', {
             year: 'numeric',
             month: '2-digit',
             day: '2-digit'
         });
-    
+
         tableHTML += `
-            <tr class=" py-0">
-                <td class=" py-0 border border-gray-200 text-center  p-4" contenteditable="true">${item.Identificacion}</td>
-                <td class=" py-0 border border-gray-200 text-center  p-4" contenteditable="true">${item.Nombre}</td>
-                <td class=" py-0 border border-gray-200 text-center  p-4" contenteditable="true">${fechaFormateada}</td>
-                <td class=" py-0 border border-gray-200 text-center  p-4" contenteditable="true"><input type="checkbox" class="fila-checkbox" value="${item.Nombre}"></td>
+            <tr class="py-0">
+                <td class="py-0 border border-gray-200 text-center p-4">${item.Identificacion}</td>
+                <td class="py-0 border border-gray-200 text-center p-4">${item.Nombre}</td>
+                <td class="py-0 border border-gray-200 text-center p-4">${fechaFormateada}</td>
+                <td class="py-0 border border-gray-200 text-center p-4"><input type="checkbox" class="fila-checkbox" value="${item.Nombre}"></td>
             </tr>
         `;
     });
