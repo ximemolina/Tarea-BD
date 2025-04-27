@@ -2,7 +2,7 @@ export function setearTabla(transacciones){
   let tabla = `
     <div class="relative overflow-hidden shadow-md rounded-lg mt-4">
       <table class="table-fixed w-full text-left border-collapse">
-        <thead class="uppercase bg-[#79a1f0] text-[#f3f7ff]">
+        <thead class="uppercase bg-[#265fbb] text-[#f3f7ff]">
           <tr>
             <th class="py-3 px-4 border border-gray-200 text-center font-bold">Fecha</th>
             <th class="py-3 px-4 border border-gray-200 text-center font-bold">Tipo de Movimiento</th>
