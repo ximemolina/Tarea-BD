@@ -1,5 +1,5 @@
 CREATE PROCEDURE ListarMovimientos (
-	@inNombre VARCHAR(64)
+	@inNombre VARCHAR( 64 )
 	,@outResultCode INT OUTPUT
 )
 AS
@@ -9,7 +9,7 @@ BEGIN
 
 	BEGIN TRY
 		
-		---Obtener información del empleado
+		---Obtener informaciï¿½n del empleado
 		SELECT
 			E.ValorDocumentoIdentidad AS ValorDocumentoIdentidad
 			, E.Nombre as Nombre
@@ -45,7 +45,7 @@ BEGIN
 		ORDER BY
 			PostTime DESC
 
-		SET @outResultCode = 0; --Código éxito
+		SET @outResultCode = 0; --Cï¿½digo ï¿½xito
 
 	END TRY
 	BEGIN CATCH

@@ -56,7 +56,7 @@ async function enviarXML() {
         const pool = await sql.connect(config);
 
         await pool.request()
-            .input('xmlData', sql.NVarChar(sql.MAX), xmlContent)
+            .input('inXmlData', sql.NVarChar(sql.MAX), xmlContent)
             .execute('CargaDatos');
 
         console.log("XML enviado y procesado en SQL Server.");

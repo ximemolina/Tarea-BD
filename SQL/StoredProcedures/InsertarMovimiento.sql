@@ -23,15 +23,15 @@ BEGIN
 	BEGIN TRY
 		
 		DECLARE @saldoFinalEmpleado INT = 0; ---Saldo resultante luego de aplicar movimiento
-		DECLARE @saldoActualEmpleado INT; ---Saldo que ya tenía el empleado antes de movimiento
-		DECLARE @tipoAccion VARCHAR(64); ---Debito o Credito
-		DECLARE @descripcion VARCHAR(1024); ---Descripcion para tabla Evento
-		DECLARE @descripcionError VARCHAR(1024); ---Descripcion de codigo de error
+		DECLARE @saldoActualEmpleado INT; ---Saldo que ya tenï¿½a el empleado antes de movimiento
+		DECLARE @tipoAccion VARCHAR( 64 ); ---Debito o Credito
+		DECLARE @descripcion VARCHAR( 1024 ); ---Descripcion para tabla Evento
+		DECLARE @descripcionError VARCHAR( 1024 ); ---Descripcion de codigo de error
 		DECLARE @valorDocId INT; ---Valor Documento de Identidad del Empleado
 		DECLARE @fecha DATE; -- Fecha actual con formato YYYY-MM-DD
 		DECLARE @idTipoEvento INT; ---Tipo Evento ocurriendo
 
-		SET @outResultCode = 0; --Código éxito
+		SET @outResultCode = 0; --Cï¿½digo ï¿½xito
 		SET @idTipoEvento = 14; ---Tipo Evento Insertar Movimiento Exitoso
 		
 		---Obtener valor DocId del Empleado
@@ -72,7 +72,7 @@ BEGIN
 
 		END;
 
-		IF @saldoFinalEmpleado < 0 ---Revisar si saldo de empleado dará negativo
+		IF @saldoFinalEmpleado < 0 ---Revisar si saldo de empleado darï¿½ negativo
 		BEGIN
 				
 			SET @outResultCode = 50011; --Error : Monto del movimiento rechazado por saldo negativo
@@ -87,17 +87,17 @@ BEGIN
 				
 			--Setear descripcion para tabla evento
 			SET @descripcion =  ( 'Descripcion error: '
-								+ CONVERT( VARCHAR(1024) , @descripcionError )
+								+ CONVERT( VARCHAR( 1024 ) , @descripcionError )
 								+ ' Valor Documento de Identidad: '
-								+ CONVERT ( VARCHAR(20) , @valorDocId)
+								+ CONVERT ( VARCHAR( 20 ) , @valorDocId )
 								+ ' Nombre: '
-								+ CONVERT ( VARCHAR(64) , @inNombre)
+								+ CONVERT ( VARCHAR( 64  ) , @inNombre )
 								+ ' Saldo Actual: '
-								+ CONVERT ( VARCHAR(20) , @saldoActualEmpleado)
+								+ CONVERT ( VARCHAR( 20 ) , @saldoActualEmpleado )
 								+ ' Nombre de Tipo de Movimiento: '
-								+ CONVERT ( VARCHAR(64) , @inNombreMovimiento)
+								+ CONVERT ( VARCHAR( 64 ) , @inNombreMovimiento )
 								+ ' Monto: '
-								+ CONVERT ( VARCHAR(20) , @inMonto)
+								+ CONVERT ( VARCHAR( 20 ) , @inMonto )
 								)
 				
 			--Actualizar bitacoraEvento
@@ -125,21 +125,28 @@ BEGIN
 
 			--Setear descripcion para tabla evento
 			SET @descripcion =  (' Valor Documento de Identidad: '
-								+ CONVERT ( VARCHAR(20) , @valorDocId)
+								+ CONVERT ( VARCHAR( 20 ) , @valorDocId )
 								+ ' Nombre: '
-								+ CONVERT ( VARCHAR(64) , @inNombre)
+								+ CONVERT ( VARCHAR( 64 ) , @inNombre )
 								+ ' Nuevo Saldo: '
-								+ CONVERT ( VARCHAR(20) , @saldoFinalEmpleado)
+								+ CONVERT ( VARCHAR( 20 ) , @saldoFinalEmpleado )
 								+ ' Nombre de Tipo de Movimiento: '
-								+ CONVERT ( VARCHAR(64) , @inNombreMovimiento)
+								+ CONVERT ( VARCHAR( 64 ) , @inNombreMovimiento )
 								+ ' Monto: '
-								+ CONVERT ( VARCHAR(20) , @inMonto)
+								+ CONVERT ( VARCHAR( 20 ) , @inMonto )
 								)
 			
 			---Setear fecha actual
-			SET @fecha = ( SELECT CONVERT (date, SYSDATETIME()) )
+			SET @fecha = ( SELECT CONVERT (date, SYSDATETIME() ) )
 
 			BEGIN TRANSACTION tInsertarMovimiento
+			
+				---Actualizar informaciï¿½n de saldo del empleado
+				UPDATE dbo.Empleado
+				SET 
+					SaldoVacaciones = @saldoFinalEmpleado
+				WHERE 
+					Nombre = @inNombre
 
 				--Actualizar bitacoraEvento
 				INSERT INTO dbo.BitacoraEvento (
@@ -186,13 +193,6 @@ BEGIN
 					@inNombre = E.Nombre
 					AND @inNombreMovimiento = TM.Nombre
 					AND @inUsername = U.Username
-
-				---Actualizar información de saldo del empleado
-				UPDATE dbo.Empleado
-				SET 
-					SaldoVacaciones = @saldoFinalEmpleado
-				WHERE 
-					Nombre = @inNombre
 
 			COMMIT TRANSACTION tInsertarMovimiento
 

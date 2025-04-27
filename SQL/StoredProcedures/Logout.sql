@@ -1,7 +1,7 @@
 CREATE PROCEDURE dbo.Logout(
-	@inUsername VARCHAR(64)
-	, @inIpAdress VARCHAR(64)
-	, @inNombreEvento VARCHAR(64)
+	@inUsername VARCHAR( 64 )
+	, @inIpAdress VARCHAR( 64 )
+	, @inNombreEvento VARCHAR( 64 )
 	, @outResultCode INT OUTPUT)
 AS
 BEGIN
@@ -10,7 +10,7 @@ BEGIN
 
 	BEGIN TRY
 		
-		SET @outResultCode = 0; ---Código éxito
+		SET @outResultCode = 0; ---Cï¿½digo ï¿½xito
 
 		INSERT INTO dbo.BitacoraEvento( ---Actualizar bitacora evento con info de Logout
 			IdTipoEvento

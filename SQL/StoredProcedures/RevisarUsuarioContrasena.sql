@@ -1,8 +1,8 @@
 CREATE PROCEDURE [dbo].[RevisarUsuarioContrasena](
-	@inUsername VARCHAR(64)
-	, @inPassword VARCHAR(64)
-	, @inIpAdress VARCHAR(64)
-	, @outResultCode INT OUTPUT)
+	@inUsername VARCHAR( 64 )
+	, @inPassword VARCHAR( 64 )
+	, @inIpAdress VARCHAR( 64 )
+	, @outResultCode INT OUTPUT )
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -11,7 +11,7 @@ BEGIN
 		
 		DECLARE @IdTipoEvento INT=  1; ---Id tipo de evento de Login Exitoso
 		DECLARE @IdPostByUser INT; ---Id Usuario que est� realizando el evento
-		DECLARE @Descripcion VARCHAR(1024)= ''; ---Descripci�n de Evento Ocurrido
+		DECLARE @Descripcion VARCHAR( 1024 )= ''; ---Descripci�n de Evento Ocurrido
 		DECLARE @CantLogin INT; --Cantidad de logins No Exitosos en la ultima media hora
 
 		SET @outResultCode=0; ---C�digo error 0 indica que no hubo error
@@ -21,10 +21,10 @@ BEGIN
 		IF NOT EXISTS ( SELECT 1 FROM dbo.Usuario A WHERE A.Username = @inUsername )
 		BEGIN
 
-			SET @IdPostByUser = 0;---Asigna id por default de user "no conocido"
+			SET @IdPostByUser = 7;---Asigna id por default de user "no conocido"
 
 			---Cantidad de Logins No Exitosos que han habido en la ultima media hora
-			SET @CantLogin = ( SELECT COUNT(1)
+			SET @CantLogin = ( SELECT COUNT( 1 )
 								FROM 
 									dbo.BitacoraEvento AS E
 								WHERE
@@ -68,9 +68,9 @@ BEGIN
 
 				SET @Descripcion = ( 
 									'Numero de intento en los ultimos 30mins: ' 
-									+ CONVERT( VARCHAR(20) , @CantLogin+1 ) 
+									+ CONVERT( VARCHAR( 20 ) , @CantLogin+1 ) 
 									+ '. Codigo de error: ' 
-									+ CONVERT( VARCHAR(64) , @outResultCode)); ---Busca y asigna description de error
+									+ CONVERT( VARCHAR( 64 ) , @outResultCode ) ); ---Busca y asigna description de error
 			
 				INSERT dbo.BitacoraEvento( 	---Inserci�n de evento Login No Exitoso a BitacoraEventos
 					IdTipoEvento
@@ -106,12 +106,12 @@ BEGIN
 		BEGIN
 			
 			---Cantidad de Logins No Exitosos que han habido en la ultima media hora
-			SET @CantLogin = ( SELECT COUNT(1)
+			SET @CantLogin = ( SELECT COUNT( 1 )
 								FROM 
 									dbo.BitacoraEvento AS E
 								WHERE
 									DATEDIFF( MINUTE, E.PostTime, GETDATE() ) < 30 ---Revisar ultima media hora
-									AND E.IdTipoEvento = 2) ---Revisar que sea error de login
+									AND E.IdTipoEvento = 2 ) ---Revisar que sea error de login
 			
 			---Revisar que no hayan mas de 5 Logins No Exitosos en la ultima media hora
 			IF @CantLogin > 4
@@ -150,9 +150,9 @@ BEGIN
 
 				SET @Descripcion = ( 
 									'Numero de intento en los ultimos 30mins: ' 
-									+ CONVERT( VARCHAR(20) , @CantLogin+1 ) 
+									+ CONVERT( VARCHAR( 20 ) , @CantLogin+1 ) 
 									+ '. Codigo de error: ' 
-									+ CONVERT( VARCHAR(64) , @outResultCode )); ---Busca y asigna description de error
+									+ CONVERT( VARCHAR( 64 ) , @outResultCode ) ); ---Busca y asigna description de error
 			
 				INSERT dbo.BitacoraEvento( 	---Inserci�n de evento Login No Exitoso a BitacoraEventos
 					IdTipoEvento

@@ -5,8 +5,8 @@ GO
 
 CREATE PROCEDURE [dbo].[InsertarEmpleado] (
     @inValorDocumentoIdentidad INT
-	, @inNombre VARCHAR(64)
-	, @inNombrePuesto VARCHAR(64)
+	, @inNombre VARCHAR( 64 )
+	, @inNombrePuesto VARCHAR( 64 )
 	, @outResultCode INT OUTPUT
 )
 AS

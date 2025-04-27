@@ -9,7 +9,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE PROCEDURE [dbo].[ObtenerDocId] (
-	@inNombre VARCHAR(64)
+	@inNombre VARCHAR( 64 )
 	, @outResultCode INT OUTPUT
 )
 AS
@@ -26,7 +26,7 @@ BEGIN
 		WHERE
 			E.Nombre = @inNombre
 
-		SET @outResultCode = 0; ---Código éxito
+		SET @outResultCode = 0; ---Cï¿½digo ï¿½xito
 
 	END TRY
 	BEGIN CATCH

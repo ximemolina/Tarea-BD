@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[MostrarError](
 	@inCodeError INT
-	,@outResultCode INT OUTPUT)
+	,@outResultCode INT OUTPUT )
 AS
 BEGIN
 	SET NOCOUNT ON;

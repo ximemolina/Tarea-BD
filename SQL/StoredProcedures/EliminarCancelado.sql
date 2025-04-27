@@ -63,13 +63,13 @@ BEGIN
 		SET @Descripcion = ( 'Valor Documento de Identidad: ' 
 							+ CONVERT( VARCHAR , @DocIdentidad ) 
 							+ '. Nombre del Empleado: ' 
-							+ CONVERT( VARCHAR(64) , @inNombre ) 
+							+ CONVERT( VARCHAR( 64 ) , @inNombre ) 
 							+ '. Nombre del Puesto: ' 
-							+ CONVERT( VARCHAR(64) , @NombrePuesto ) 
+							+ CONVERT( VARCHAR( 64 ) , @NombrePuesto ) 
 							+ '. Saldo de Vacaciones: '
-							+ CONVERT( VARCHAR(64) , @SaldoVacaciones ) ); ---Busca y asigna description de evento
+							+ CONVERT( VARCHAR( 64 ) , @SaldoVacaciones ) ); ---Busca y asigna description de evento
 
-		---Obtener ID del user que está realizando la accion
+		---Obtener ID del user que estï¿½ realizando la accion
 		SET @IdPostByUser = ( SELECT 
 									U.Id AS Id
 								FROM 
