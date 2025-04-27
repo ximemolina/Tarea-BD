@@ -28,18 +28,6 @@ let xmlContent = fs.readFileSync(xmlPath, 'utf-8');
 // Elimina cualquier línea que comience con <?xml ... ?>
 xmlContent = xmlContent.replace(/<\?xml[^>]*\?>/, '');
 
-// Enviar a SQL Server
-try {
-    const pool = await sql.connect(config);
-    const result = await pool.request()
-        .input('xmlData', sql.NVarChar(sql.MAX), xmlContent)
-        .execute('CargaDatos');
-
-    console.log("✅ Procedimiento ejecutado.");
-    console.log(result.recordset);
-} catch (err) {
-    console.error("Error al ejecutar en SQL:", err.message);
-}
 
 export async function conectarDB() { //conexión con base de datos
     try {
@@ -57,6 +45,7 @@ async function enviarXML() {
 
         await pool.request()
             .input('inXmlData', sql.NVarChar(sql.MAX), xmlContent)
+            .output('outResultCode', sql.Int)
             .execute('CargaDatos');
 
         console.log("XML enviado y procesado en SQL Server.");
