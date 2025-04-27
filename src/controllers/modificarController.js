@@ -57,8 +57,11 @@ export const generarMenuPuesto = async (req, res) => {
 //Controlador para modificar empleado
 export const modificarEmpleado = async (req, res) => {
     try {
-        const { nombreActual, nombreNuevo, DIActual, DINuevo, puestoNuevo, username, ipAdress } = req.body;
-        const response = await modificarDB.modificarEmpleado(nombreActual, nombreNuevo, DIActual, DINuevo, puestoNuevo, username, ipAdress);
+        const { nombreActual, nombreNuevo, DIActual, DINuevo,
+                 puestoNuevo, username, ipAdress } = req.body;
+        const response = await modificarDB.modificarEmpleado(
+                        nombreActual, nombreNuevo, DIActual, 
+                        DINuevo, puestoNuevo, username, ipAdress);
 
         const outResultCode = response[0];
 

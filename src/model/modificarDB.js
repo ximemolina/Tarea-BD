@@ -34,7 +34,9 @@ export function construirMenuDropdown(opciones) {
 }
 
 //Modificar empleado
-export async function modificarEmpleado(nombreActual, nombreNuevo, DIActual, DINuevo, puestoNuevo, username, ipAdress) {
+export async function modificarEmpleado(nombreActual, nombreNuevo, 
+                                        DIActual, DINuevo, puestoNuevo, 
+                                        username, ipAdress) {
   try {
           let pool = await conectarDB();
   

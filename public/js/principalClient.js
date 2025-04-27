@@ -65,16 +65,10 @@ async function filtrarEmpleados() {
 
 //Inserta un nuevo empleado
 function insertar(){
-    const empleado = localStorage.getItem('empleado');
-    if (empleado) {
-        try {
-            window.location.href = 'http://localhost:3300/insertar/insertarEmpleado'; // Redirige a la nueva página
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    }
-    else {
-        window.alert("Debe seleccionar a un empleado");
+    try {
+        window.location.href = 'http://localhost:3300/insertar/ventanaInsertar'; // Redirige a la nueva página
+    } catch (error) {
+        console.error('Error:', error);
     }
 }
 

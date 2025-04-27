@@ -79,11 +79,11 @@ async function modificarEmpleado(params) {
         const rawDI = localStorage.getItem('DIActual');
         const parsedDI = JSON.parse(rawDI);
         const actualDI = parsedDI.DI;
-        console.log(actualDI);
+
         const nombreActual = nombre;
-        const nombreNuevo = NombreNuevo.value;
+        const nombreNuevo = (NombreNuevo.value).trim();
         const DIActual = String(actualDI);
-        const DINuevo = DocumentoIdentidadNuevo.value;
+        const DINuevo = (DocumentoIdentidadNuevo.value).trim();
         const puestoNuevo = Seleccion.textContent;
 
         const response = await fetch('/modificar/modificarEmpleado', {
@@ -98,7 +98,7 @@ async function modificarEmpleado(params) {
 
         const data = await response.json();
         const code = data.outResultCode;
-        console.log(code);
+        console.log('Codigo resultado: ', code);
 
         if (code > 0) {
             descripcionError(code);
@@ -106,11 +106,7 @@ async function modificarEmpleado(params) {
         else {
             alert('Los datos del empleado han sido modificados exitosamente');
 
-            let empleado = JSON.parse(localStorage.getItem('empleado'));
-            empleado.nombre = nombreNuevo;
-            localStorage.setItem('empleado', JSON.stringify(empleado));
-            console.log("Hola", localStorage.getItem("empleado"));
-            mostrarEmpleado();
+            regresarPrincipal();
         }
         
     } catch (error) {
