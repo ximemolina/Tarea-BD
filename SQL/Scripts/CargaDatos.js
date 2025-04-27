@@ -43,11 +43,12 @@ async function enviarXML() {
     try {
         const pool = await sql.connect(config);
 
-        await pool.request()
+        let resultado = await pool.request()
             .input('inXmlData', sql.NVarChar(sql.MAX), xmlContent)
             .output('outResultCode', sql.Int)
             .execute('CargaDatos');
-
+        
+        console.log(resultado.output)
         console.log("XML enviado y procesado en SQL Server.");
         await sql.close();
     } catch (err) {
