@@ -1,4 +1,3 @@
-USE [Database]
 GO
 /****** Object:  StoredProcedure [dbo].[ListarEmpleadosId]    Script Date: 4/21/2025 11:25:39 PM ******/
 SET ANSI_NULLS ON
@@ -8,13 +7,34 @@ GO
 
 CREATE PROCEDURE [dbo].[ListarEmpleadosId] (
 	@inId VARCHAR(64)
+	, @inUsername VARCHAR( 64 )
+	, @inIpAdress VARCHAR( 64 )
 	, @outResultCode INT OUTPUT
 )
 AS
 BEGIN
 	SET NOCOUNT ON;
 	BEGIN TRY
-		
+		DECLARE @IdTipoEvento INT = 12;		--Consulta por documento identidad
+		DECLARE @IdPostByUser INT;
+		DECLARE @Descripcion VARCHAR( 1024 );
+
+		SET @IdPostByUser = ( SELECT 
+									U.Id AS Id
+							  FROM
+									dbo.Usuario AS U
+							  WHERE
+									U.Username = @inUsername );
+
+		SET @Descripcion = ( 'Valor del filtro del documento de identidad: ' 
+							+ CONVERT( VARCHAR(64) , @inId ));
+
+		IF PATINDEX('%[^0-9]%', LTRIM(RTRIM(@inId))) > 0 OR LTRIM(RTRIM(@inId)) = ''
+		BEGIN
+			SET @outResultCode = 50010		--Mal formato de documento de identidad
+		END;
+
+		ELSE
 		BEGIN 
 			SELECT 
 				E.ValorDocumentoIdentidad AS Identificacion
@@ -26,6 +46,21 @@ BEGIN
 				CAST(E.ValorDocumentoIdentidad AS VARCHAR) LIKE ('%' + @inId + '%') AND E.EsActivo = 1
 			ORDER BY
 				Nombre
+
+			---Inserta Evento en BitacoraEvento
+			INSERT INTO dbo.BitacoraEvento (
+				IdTipoEvento
+				,Descripcion
+				,IdPostByUser
+				,PostInIp
+				,PostTime )
+			VALUES( 
+				@IdTipoEvento
+				, @Descripcion 
+				, @IdPostByUser 
+				,@inIpAdress
+				, GETDATE() )
+
 			SET @outResultCode = 0;			--Hay registros
 		END;
 

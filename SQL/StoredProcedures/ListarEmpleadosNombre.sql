@@ -7,13 +7,37 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE PROCEDURE [dbo].[ListarEmpleadosNombre] ( 
-	@inNombre VARCHAR(64)
+	@inNombre VARCHAR( 64 )
+	, @inUsername VARCHAR( 64 )
+	, @inIpAdress VARCHAR( 64 )
 	, @outResultCode INT OUTPUT
 )
 AS
 BEGIN
 	SET NOCOUNT ON;
 	BEGIN TRY
+		DECLARE @IdTipoEvento INT = 11;		--Consulta por nombre
+		DECLARE @IdPostByUser INT;
+		DECLARE @Descripcion VARCHAR( 1024 );
+
+		SET @inNombre = LTRIM(RTRIM(@inNombre));
+
+		SET @IdPostByUser = ( SELECT 
+									U.Id AS Id
+							  FROM
+									dbo.Usuario AS U
+							  WHERE
+									U.Username = @inUsername );
+
+		SET @Descripcion = ( 'Valor del filtro del nombre: ' 
+							+ CONVERT( VARCHAR(64) , @inNombre ));
+
+		IF PATINDEX( '%[^A-Za-z ]%', @inNombre ) > 0 OR LTRIM(RTRIM(@inNombre)) = ''
+		BEGIN 
+			SET @outResultCode = 50009;		--Nombre no alfabetico
+		END;
+		
+		ELSE
 		BEGIN 
 			SELECT 
 				E.Id AS Identificacion
@@ -25,7 +49,22 @@ BEGIN
 				LOWER(E.Nombre) LIKE LOWER('%' + @inNombre + '%') AND E.EsActivo = 1
 			ORDER BY
 				Nombre
-			SET @outResultCode = 0;			
+
+			---Inserta Evento en BitacoraEvento
+			INSERT INTO dbo.BitacoraEvento (
+				IdTipoEvento
+				, Descripcion
+				, IdPostByUser
+				, PostInIp
+				, PostTime )
+			VALUES( 
+				@IdTipoEvento
+				, @Descripcion 
+				, @IdPostByUser 
+				, @inIpAdress
+				, GETDATE() )
+
+			SET @outResultCode = 0;			--Hay registros
 		END;
 
 	END TRY

@@ -1,28 +1,27 @@
+GO
+/****** Object:  StoredProcedure [dbo].[ListarPuestos]    Script Date: 4/27/2025 9:56:43 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE [dbo].[ListarEmpleados] (
-    @outResultCode INT OUTPUT
+CREATE PROCEDURE [dbo].[ListarPuestos] ( 
+	@outResultCode INT OUTPUT
 )
 AS
 BEGIN
-    SET NOCOUNT ON;
+	SET NOCOUNT ON;
 	BEGIN TRY
-		SELECT
-			E.ValorDocumentoIdentidad AS Identificacion
-			, E.Nombre AS Nombre
-			, E.FechaContratacion AS Ingreso
+		SELECT 
+			P.Nombre AS Puesto
 		FROM 
-			dbo.Empleado AS E
-		WHERE 
-			E.EsActivo = 1		--Filtrar empleados activos
-		ORDER BY
-			Nombre;
+			dbo.Puesto AS P
+
 		SET @outResultCode = 0;
 	END TRY
+
 	BEGIN CATCH
+		
 		INSERT INTO dbo.DBError VALUES
 		(
 			SUSER_NAME(),
@@ -34,7 +33,10 @@ BEGIN
 			ERROR_MESSAGE(),
 			GETDATE()
 		);
+
 		SET @outResultCode = 50008;
+
 	END CATCH
-	SET NOCOUNT OFF;
+
+    SET NOCOUNT OFF;
 END;
