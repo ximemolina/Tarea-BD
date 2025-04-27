@@ -8,6 +8,7 @@ const NombreEmpleado = document.getElementById("NombreEmpleado");
 const NombreNuevo = document.getElementById("NombreNuevo");
 const Puesto = document.getElementById("Puesto");
 const Seleccion = document.getElementById("Seleccion");
+const SaldoVacacion = document.getElementById("SaldoVacacion");
 
 const raw = localStorage.getItem('user');
 const parsedUser = JSON.parse(raw);
@@ -63,6 +64,7 @@ async function mostrarEmpleado() {
         DocumentoIdentidadNuevo.value = data.datos.Cedula;
         Puesto.textContent = `Puesto: ${data.datos.Puesto}`;
         Seleccion.textContent = data.datos.Puesto;
+        SaldoVacacion.textContent = `Saldo Vacaciones: ${data.datos.Vacaciones}`;
         localStorage.setItem('DIActual', JSON.stringify({DI: data.datos.Cedula}));
         console.log(localStorage.getItem("DIActual"));
  
@@ -104,7 +106,7 @@ async function modificarEmpleado(params) {
         }
         else {
             alert('Los datos del empleado han sido modificados exitosamente');
-            
+
             let empleado = JSON.parse(localStorage.getItem('empleado'));
             empleado.nombre = nombreNuevo;
             localStorage.setItem('empleado', JSON.stringify(empleado));

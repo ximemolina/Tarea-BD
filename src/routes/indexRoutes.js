@@ -5,6 +5,7 @@ import principalRoutes from './principalRoutes.js';
 import movimientosRoutes from './movimientosRoutes.js';
 import consultarRoutes from './consultarRoutes.js';
 import modificarRoutes from './modificarRoutes.js';
+import insertarRoutes from './insertarRoutes.js';
 
 const rutas_init = () => {
   const router = Router()
@@ -16,6 +17,7 @@ const rutas_init = () => {
   router.use('/consultar', consultarRoutes);
   router.use('/movimientos', movimientosRoutes);
   router.use('/modificar', modificarRoutes);
+  router.use('/insertar', insertarRoutes);
 
   return router
 }
