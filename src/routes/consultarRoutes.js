@@ -3,7 +3,7 @@ import * as consultarController from '../controllers/consultarController.js';
 
 const router = Router();
 
-//ruta para ir a la página principal
+//ruta para ir a la página consultar
 router.get('/ventanaConsultar', consultarController.consultarFile);
 
 //ruta para obtener infromacion del empleado consultado

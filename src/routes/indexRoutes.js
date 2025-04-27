@@ -3,7 +3,8 @@ import loginRoutes from './loginRoutes.js';
 import generalRoutes from './generalRoutes.js';
 import principalRoutes from './principalRoutes.js';
 import movimientosRoutes from './movimientosRoutes.js';
-import consultarRoutes from './consultarRoutes.js'
+import consultarRoutes from './consultarRoutes.js';
+import modificarRoutes from './modificarRoutes.js';
 
 const rutas_init = () => {
   const router = Router()
@@ -14,6 +15,7 @@ const rutas_init = () => {
   router.use('/principal', principalRoutes);
   router.use('/consultar', consultarRoutes);
   router.use('/movimientos', movimientosRoutes);
+  router.use('/modificar', modificarRoutes);
 
   return router
 }

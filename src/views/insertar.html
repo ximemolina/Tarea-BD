@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pantalla de Gestión</title>
+    <link href="/css/styles.css" rel="stylesheet">
+    <script src="/js/insertarClient.js" defer></script>
+</head>
+
+<body class="flex h-screen items-center justify-center bg-gray-100">
+    <div id="datosModificar" class="flex flex-col rounded-2xl w-[800px] bg-[#ffffff] shadow-xl place-self-center m-9">
+        <div class="text-2xl font-bold text-white p-6 bg-blue-800 rounded-t-2xl">
+            Registro de nuevo empleado:
+        </div>
+        <div class="flex flex-col pl-8 pt-8 pr-8">
+            <div class="text-lg mb-2.5 text-[#374151] font-bold">Nombre:</div>
+            <input id="NombreEmpleado" placeholder="Nombre" autocomplete="off" 
+                class="px-4 py-2 text-lg rounded-lg border focus:outline focus:outline-2 focus:outline-offset-2 bg-[#ffffff] text-[#000000] focus:outline-[#aaaaaa] border-[#cccccc]">
+
+            <div class="text-lg mb-2.5 mt-2.5 text-[#374151] font-bold">Documento de identidad:</div>
+            <input id="DocumentoIdentidad" placeholder="Documento identidad" autocomplete="off" 
+                class="px-4 py-2 text-lg rounded-lg border focus:outline focus:outline-2 focus:outline-offset-2 bg-[#ffffff] text-[#000000] focus:outline-[#aaaaaa] border-[#cccccc]">
+
+            <div class="text-lg mb-2.5 mt-2.5 font-bold text-[#374151]">Puesto:</div>
+            <div class="relative inline-block text-left">
+                <div>
+                    <button id="btnMenuPuesto" type="button" 
+                        class="inline-flex w-2xs items-center justify-between gap-x-1.5 rounded-md bg-white px-3 py-2 text-lg font-semibold text-gray-900 ring-1 ring-gray-300 ring-inset hover:bg-gray-50" 
+                        aria-expanded="true" aria-haspopup="true">
+                        Seleccionar puesto
+                        <svg class="size-5 text-gray-400 ml-auto" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                            <path fill-rule="evenodd" 
+                                d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" 
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+                <div id="DropdownPuesto" 
+                    class="overflow-auto h-28 z-10 mt-2 w-2xs origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-hidden" 
+                    role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                    <!-- Aquí se generarán las opciones dinámicamente -->
+                </div>
+
+                <div class="flex flex-col space-y-2 w-2xs">
+                    <label for="fecha" class="text-lg mb-2.5 mt-2.5 text-[#374151] font-bold">Fecha de contratación:</label>
+                    <input type="date" id="FechaContratacion" name="fecha" 
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-700 text-lg" 
+                        placeholder="yyyy/mm/dd">
+                </div>
+
+                <div id="SaldoVacacion" class="text-lg mb-2.5 mt-2.5 font-bold text-[#374151]">
+                    Saldo Vacaciones:
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-end pt-6">
+            <button id="btnCancelar" 
+                class="bg-red-700 text-[#ffffff] font-bold text-base p-3 rounded-lg hover:bg-red-600 active:scale-95 transition-transform transform mr-8 mb-8">
+                Cancelar
+            </button>
+            <button id="btnRegistrar" 
+                class="bg-[#2856b3] text-[#ffffff] font-bold text-base p-3 rounded-lg hover:bg-blue-700 active:scale-95 transition-transform transform mr-8 mb-8">
+                Registrar
+            </button>
+        </div>
+    </div>
+</body>
+</html>

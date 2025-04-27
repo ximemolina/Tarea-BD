@@ -8,8 +8,8 @@ const btnFiltrar = document.getElementById("btnFiltrar");
 
 const raw = localStorage.getItem('user');
 const parsedUser = JSON.parse(raw);
-const username = parsedUser.username
-const ipAdress = parsedUser.IP
+const username = parsedUser.username;
+const ipAdress = parsedUser.IP;
 
 btnInsertar.addEventListener("click", insertar);
 btnEliminar.addEventListener("click", eliminar);
@@ -110,7 +110,17 @@ async function eliminar(){
 }
 
 function modificar(){
-    
+    const empleado = localStorage.getItem('empleado');
+    if (empleado) {
+        try {
+            window.location.href = 'http://localhost:3300/modificar/ventanaModificar'; // Redirige a la nueva página
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+    else {
+        window.alert("Debe seleccionar a un empleado");
+    }
 }
 
 function consultar(){
