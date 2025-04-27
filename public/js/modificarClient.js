@@ -66,7 +66,6 @@ async function mostrarEmpleado() {
         Seleccion.textContent = data.datos.Puesto;
         SaldoVacacion.textContent = `Saldo Vacaciones: ${data.datos.Vacaciones}`;
         localStorage.setItem('DIActual', JSON.stringify({DI: data.datos.Cedula}));
-        console.log(localStorage.getItem("DIActual"));
  
         generarMenuPuesto();
     } catch (error) {
@@ -110,7 +109,7 @@ async function modificarEmpleado(params) {
             let empleado = JSON.parse(localStorage.getItem('empleado'));
             empleado.nombre = nombreNuevo;
             localStorage.setItem('empleado', JSON.stringify(empleado));
-
+            console.log("Hola", localStorage.getItem("empleado"));
             mostrarEmpleado();
         }
         

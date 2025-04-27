@@ -65,7 +65,17 @@ async function filtrarEmpleados() {
 
 //Inserta un nuevo empleado
 function insertar(){
-    
+    const empleado = localStorage.getItem('empleado');
+    if (empleado) {
+        try {
+            window.location.href = 'http://localhost:3300/insertar/insertarEmpleado'; // Redirige a la nueva página
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+    else {
+        window.alert("Debe seleccionar a un empleado");
+    }
 }
 
 //Conseguir el documento de identidad del empleado para poder desplegarlo en alerta de eliminar
@@ -92,7 +102,8 @@ async function getDocumentoIdentidad(nombre){
 async function eliminar(){
 
     const empleado = localStorage.getItem('empleado');
-    const parsedEmpleado = JSON.parse(empleado);
+    if (empleado) {
+        const parsedEmpleado = JSON.parse(empleado);
     const nombreEmpleado = parsedEmpleado.nombre;
 
     let docId = await getDocumentoIdentidad(nombreEmpleado); 
@@ -106,6 +117,9 @@ async function eliminar(){
         eliminarAfirmado(username,ipAdress,nombreEmpleado); 
     } else { 
         eliminarCancelado(username,ipAdress,nombreEmpleado);
+    }
+    } else {
+        window.alert("Debe seleccionar a un empleado");
     }
 }
 
@@ -138,7 +152,12 @@ function consultar(){
 }
 
 function listarMovimientos() {
-    window.location.href = 'http://localhost:3300/movimientos/scrMovimientos';
+    const empleado = localStorage.getItem('empleado');
+    if (empleado) {
+        window.location.href = 'http://localhost:3300/movimientos/scrMovimientos';
+    } else {
+        window.alert("Debe seleccionar a un empleado");
+    }
 }
 
 /////////////////////////// FUNCIONES AUXILIARES ///////////////////////////

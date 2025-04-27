@@ -19,7 +19,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 //despliega pag principal y vacía localStorage de empleado
 function retornar(){
-  localStorage.setItem('empleado', JSON.stringify({}));
+  localStorage.removeItem('empleado');
   window.location.href = 'http://localhost:3300/principal/ventanaPrincipal'; 
 }
 
