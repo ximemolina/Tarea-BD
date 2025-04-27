@@ -53,3 +53,18 @@ export const generarMenuPuesto = async (req, res) => {
         res.status(500).json({ error: "Error interno en el servidor." });
     }
 };
+
+//Controlador para modificar empleado
+export const modificarEmpleado = async (req, res) => {
+    try {
+        const { nombreActual, nombreNuevo, DIActual, DINuevo, puestoNuevo, username, ipAdress } = req.body;
+        const response = await modificarDB.modificarEmpleado(nombreActual, nombreNuevo, DIActual, DINuevo, puestoNuevo, username, ipAdress);
+
+        const outResultCode = response[0];
+
+        res.json({ outResultCode });
+    } catch (error) {
+        console.error("Error ejecutando modificarEmpleado:", error);
+        res.status(500).json({ error: "Error interno en el servidor." });
+    }
+};

@@ -12,4 +12,7 @@ router.post('/datosEmpleado', modificarController.datosEmpleado);
 //ruta para generar el menu dropdown
 router.get('/generarMenuPuesto', modificarController.generarMenuPuesto);
 
+//ruta para modificar empleado
+router.post('/modificarEmpleado', modificarController.modificarEmpleado);
+
 export default router;
