@@ -3,7 +3,7 @@ const btnLogin = document.getElementById("btnLogin");
 btnLogin.addEventListener("click", login);
 
 window.addEventListener('DOMContentLoaded', () => {
-    revisarBloqueo();
+    //revisarBloqueo();
   });
 
 
@@ -58,7 +58,7 @@ async function loginCorrecto(){
     try {
         //const storedData = JSON.parse(localStorage.getItem('user'));
         //console.log(storedData);
-        window.location.href = 'http://localhost:3300/principal/ventanaPrincipal'; // Redirige a la nueva página
+        window.location.href = 'http://localhost:3000/principal/ventanaPrincipal'; // Redirige a la nueva página
     } catch (error) {
         console.error('Error:', error);
     }

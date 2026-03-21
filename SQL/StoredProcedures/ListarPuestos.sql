@@ -1,11 +1,4 @@
-GO
-/****** Object:  StoredProcedure [dbo].[ListarPuestos]    Script Date: 4/27/2025 9:56:43 AM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE PROCEDURE [dbo].[ListarPuestos] ( 
+CREATE  OR ALTER PROCEDURE [dbo].[ListarPuestos] ( 
 	@outResultCode INT OUTPUT
 )
 AS
@@ -40,3 +33,4 @@ BEGIN
 
     SET NOCOUNT OFF;
 END;
+GO

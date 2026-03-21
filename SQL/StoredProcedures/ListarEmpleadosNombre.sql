@@ -1,12 +1,4 @@
-USE [Database]
-GO
-/****** Object:  StoredProcedure [dbo].[ListarEmpleadosNombre]    Script Date: 4/21/2025 10:29:16 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE PROCEDURE [dbo].[ListarEmpleadosNombre] ( 
+CREATE  OR ALTER PROCEDURE [dbo].[ListarEmpleadosNombre] ( 
 	@inNombre VARCHAR( 64 )
 	, @inUsername VARCHAR( 64 )
 	, @inIpAdress VARCHAR( 64 )
@@ -85,3 +77,4 @@ BEGIN
 	END CATCH
 	SET NOCOUNT OFF;
 END
+GO

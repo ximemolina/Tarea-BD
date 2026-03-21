@@ -30,7 +30,7 @@ window.addEventListener('DOMContentLoaded', () => {
 function regresarPrincipal() {
     try {
         localStorage.removeItem('empleado');
-        window.location.href = 'http://localhost:3300/principal/ventanaPrincipal'; // Redirige a la nueva página
+        window.location.href = 'http://localhost:3000/principal/ventanaPrincipal'; // Redirige a la nueva página
     } catch (error) {
         console.error('Error:', error);
     }

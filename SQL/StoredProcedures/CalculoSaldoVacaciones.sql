@@ -1,11 +1,4 @@
-GO
-/****** Object:  StoredProcedure [dbo].[CalculoSaldoVacaciones]    Script Date: 4/27/2025 7:31:59 AM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE PROCEDURE [dbo].[CalculoSaldoVacaciones] (
+CREATE  OR ALTER PROCEDURE [dbo].[CalculoSaldoVacaciones] (
 	@inFechaContratacion VARCHAR( 64 )
 	, @outSaldoVacacion INT OUTPUT
 	, @outResultCode INT OUTPUT
@@ -55,3 +48,4 @@ BEGIN
 	END CATCH
     SET NOCOUNT OFF;
 END;
+GO

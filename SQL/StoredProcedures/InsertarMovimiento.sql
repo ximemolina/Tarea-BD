@@ -1,14 +1,4 @@
-USE [Database]
-GO
-
-/****** Object:  StoredProcedure [dbo].[InsertarMovimiento]    Script Date: 21/4/2025 11:59:14 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE PROCEDURE [dbo].[InsertarMovimiento](
+CREATE  OR ALTER PROCEDURE [dbo].[InsertarMovimiento](
 	@inNombre VARCHAR( 64 )
 	,@inNombreMovimiento VARCHAR( 64 )
 	,@inMonto INT

@@ -1,4 +1,4 @@
-CREATE PROCEDURE dbo.Logout(
+CREATE  OR ALTER PROCEDURE 	dbo.Logout(
 	@inUsername VARCHAR( 64 )
 	, @inIpAdress VARCHAR( 64 )
 	, @inNombreEvento VARCHAR( 64 )

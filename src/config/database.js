@@ -1,32 +1,31 @@
 import sql from 'mssql';
 import * as dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+dotenv.config();
 
-// Cargar .env desde la raíz del proyecto
-dotenv.config({ path: path.resolve(__dirname, '../../.env') }); //uso de variables de entorno
-
-const config ={
-    server: process.env.server,
-    port: parseInt(process.env.port), 
-    database: process.env.database,
-    user: process.env.user,
-    password: process.env.password,
-    options:{
-        encrypt: true,
-        trustServerCertificate: true
-    },
+const config = {
+  user: "sa",
+  password: process.env.MSSQL_SA_PASSWORD,
+  server: process.env.DB_HOST, // "sqlserver" in Docker
+  port: 1433,
+  database: "mydb",
+  options: {
+    encrypt: false,
+    trustServerCertificate: true
+  },
+  pool: {
+    max: 10,
+    min: 0,
+    idleTimeoutMillis: 30000
+  }
 };
 
-export async function conectarDB() { //conexión con base de datos
-    try {
-        let pool = await sql.connect(config);
-        console.log('Conexión exitosa a SQL Server');
-        return pool;
-    } catch (err) {
-        console.error('Error en la conexión a la base de datos:', err);
-    }
+export async function conectarDB() {
+  try {
+    const pool = await sql.connect(config);
+    console.log('✅ Conexión exitosa a SQL Server');
+    return pool;
+  } catch (err) {
+    console.error('❌ Error en la conexión a la base de datos:', err);
+  }
 }

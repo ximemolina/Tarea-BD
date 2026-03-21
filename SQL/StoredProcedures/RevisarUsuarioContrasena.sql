@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[RevisarUsuarioContrasena](
+CREATE OR ALTER PROCEDURE [dbo].[RevisarUsuarioContrasena](
 	@inUsername VARCHAR( 64 )
 	, @inPassword VARCHAR( 64 )
 	, @inIpAdress VARCHAR( 64 )

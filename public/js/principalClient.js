@@ -37,7 +37,7 @@ async function regresarLogin() {
         });
         localStorage.clear();
         const data = await response.json();
-        window.location.href = 'http://localhost:3300/'; // Redirige a la nueva página
+        window.location.href = 'http://localhost:3000/'; // Redirige a la nueva página
     } catch (error) {
         console.error('Error:', error);
     }
@@ -66,7 +66,7 @@ async function filtrarEmpleados() {
 //Inserta un nuevo empleado
 function insertar(){
     try {
-        window.location.href = 'http://localhost:3300/insertar/ventanaInsertar'; // Redirige a la nueva página
+        window.location.href = 'http://localhost:3000/insertar/ventanaInsertar'; // Redirige a la nueva página
     } catch (error) {
         console.error('Error:', error);
     }
@@ -121,7 +121,7 @@ function modificar(){
     const empleado = localStorage.getItem('empleado');
     if (empleado) {
         try {
-            window.location.href = 'http://localhost:3300/modificar/ventanaModificar'; // Redirige a la nueva página
+            window.location.href = 'http://localhost:3000/modificar/ventanaModificar'; // Redirige a la nueva página
         } catch (error) {
             console.error('Error:', error);
         }
@@ -135,7 +135,7 @@ function consultar(){
     const empleado = localStorage.getItem('empleado');
     if (empleado) {
         try {
-            window.location.href = 'http://localhost:3300/consultar/ventanaConsultar'; // Redirige a la nueva página
+            window.location.href = 'http://localhost:3000/consultar/ventanaConsultar'; // Redirige a la nueva página
         } catch (error) {
             console.error('Error:', error);
         }
@@ -148,7 +148,7 @@ function consultar(){
 function listarMovimientos() {
     const empleado = localStorage.getItem('empleado');
     if (empleado) {
-        window.location.href = 'http://localhost:3300/movimientos/scrMovimientos';
+        window.location.href = 'http://localhost:3000/movimientos/scrMovimientos';
     } else {
         window.alert("Debe seleccionar a un empleado");
     }

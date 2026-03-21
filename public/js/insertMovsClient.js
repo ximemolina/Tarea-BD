@@ -27,7 +27,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 //abre pagina de listar movimientos
 function devolver(){
-  window.location.href = 'http://localhost:3300/movimientos/scrMovimientos';
+  window.location.href = 'http://localhost:3000/movimientos/scrMovimientos';
 }
 
 //obtener informacion de empleado a mostrar

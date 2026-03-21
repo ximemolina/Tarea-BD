@@ -15,8 +15,9 @@ const init = () => {
     const app = express()
     configApi(app)
     configuracionRouter(app)
-    app.listen(3300)
-    console.log("Iniciado servidor")
+    app.listen(3000, "0.0.0.0", () => {
+    console.log("Server running on port 3000");
+    });
 }
 
 //Inicializar servidor

@@ -20,12 +20,12 @@ window.addEventListener('DOMContentLoaded', () => {
 //despliega pag principal y vacía localStorage de empleado
 function retornar(){
   localStorage.removeItem('empleado');
-  window.location.href = 'http://localhost:3300/principal/ventanaPrincipal'; 
+  window.location.href = 'http://localhost:3000/principal/ventanaPrincipal'; 
 }
 
 //despliega pag de insertar movimientos
 function insertar(){
-  window.location.href = 'http://localhost:3300/movimientos/scrInsertar';
+  window.location.href = 'http://localhost:3000/movimientos/scrInsertar';
 }
 
 

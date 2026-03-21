@@ -1,9 +1,4 @@
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE PROCEDURE [dbo].[InsertarEmpleado] (
+CREATE  OR ALTER PROCEDURE [dbo].[InsertarEmpleado] (
     @inValorDocumentoIdentidad VARCHAR( 64 )
 	, @inNombre VARCHAR( 64 )
 	, @inNombrePuesto VARCHAR( 64 )
@@ -171,3 +166,4 @@ BEGIN
 	END CATCH
 	SET NOCOUNT OFF;
 END;
+GO

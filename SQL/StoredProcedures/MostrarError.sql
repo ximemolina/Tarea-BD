@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[MostrarError](
+CREATE  OR ALTER PROCEDURE [dbo].[MostrarError](
 	@inCodeError INT
 	,@outResultCode INT OUTPUT )
 AS

@@ -1,14 +1,4 @@
-USE [Database]
-GO
-
-/****** Object:  StoredProcedure [dbo].[EliminarCancelado]    Script Date: 18/4/2025 21:42:26 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE PROCEDURE [dbo].[EliminarCancelado] (
+CREATE  OR ALTER PROCEDURE [dbo].[EliminarCancelado] (
 				@inNombre VARCHAR( 64 )
 				,@inUsername VARCHAR( 64 )
 				,@inIpAdress VARCHAR( 64 )

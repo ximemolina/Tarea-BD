@@ -1,4 +1,4 @@
-CREATE PROCEDURE dbo.RevisarBloqueo(
+CREATE OR ALTER PROCEDURE dbo.RevisarBloqueo(
 	@inIpAdress VARCHAR( 64 )
 	,@outResultCode INT OUTPUT )
 AS

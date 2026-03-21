@@ -1,4 +1,4 @@
-CREATE PROCEDURE ListarMovimientos (
+CREATE  OR ALTER PROCEDURE [dbo].[ListarMovimientos] (
 	@inNombre VARCHAR( 64 )
 	,@outResultCode INT OUTPUT
 )

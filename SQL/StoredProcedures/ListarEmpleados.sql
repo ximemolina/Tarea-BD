@@ -1,9 +1,4 @@
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE PROCEDURE [dbo].[ListarEmpleados] (
+CREATE  OR ALTER PROCEDURE [dbo].[ListarEmpleados] (
     @outResultCode INT OUTPUT
 )
 AS
@@ -38,3 +33,4 @@ BEGIN
 	END CATCH
 	SET NOCOUNT OFF;
 END;
+GO

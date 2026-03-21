@@ -1,14 +1,4 @@
-USE [Database]
-GO
-
-/****** Object:  StoredProcedure [dbo].[ObtenerDocId]    Script Date: 18/4/2025 20:47:43 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE PROCEDURE [dbo].[ObtenerDocId] (
+CREATE  OR ALTER PROCEDURE [dbo].[ObtenerDocId] (
 	@inNombre VARCHAR( 64 )
 	, @outResultCode INT OUTPUT
 )
