@@ -27,7 +27,7 @@ Ejecutar:
 docker exec -it sqlserver \
 /opt/mssql-tools18/bin/sqlcmd \
 -S localhost -U sa -P "MiPassword123!" \
--C -i /bd/seed.sql
+-C -i /db/seed.sql
 ```
 ## 🌐 Acceso a la Aplicación
 
